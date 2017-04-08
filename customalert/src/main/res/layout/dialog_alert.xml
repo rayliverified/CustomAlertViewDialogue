@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_alertview_alert">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="Alert Title"
+            android:textColor="#000000"
+            android:textSize="22sp"/>
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="Sample Alert Message"
+            android:textColor="#000000"
+            android:textSize="15sp"/>
+
+        <ViewStub
+            android:id="@+id/viewStubHorizontal"
+            android:layout="@layout/layout_alertview_alert_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ViewStub
+            android:id="@+id/viewStubVertical"
+            android:layout="@layout/layout_alertview_alert_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
