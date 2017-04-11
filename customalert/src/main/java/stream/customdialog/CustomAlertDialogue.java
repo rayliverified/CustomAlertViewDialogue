@@ -6,10 +6,13 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.os.ParcelableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,13 +41,8 @@ public class CustomAlertDialogue extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         if (savedInstanceState != null) {
-            try {
-                if (isAdded() && getActivity() != null)
-                    if (builder != null) {
-                        builder = (Builder) savedInstanceState.getSerializable(Builder.class.getSimpleName());
-                    }
-            } catch (Exception e) {
-                Log.d(TAG, e.toString());
+            if (builder != null) {
+                builder = (Builder) savedInstanceState.getParcelable(Builder.class.getSimpleName());
             }
         }
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
@@ -63,13 +61,8 @@ public class CustomAlertDialogue extends DialogFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        try {
-            if (isAdded() && getActivity() != null)
-                if (builder != null)
-                    outState.putSerializable(Builder.class.getSimpleName(), builder);
-        } catch (Exception e) {
-            Log.d(TAG, e.toString());
-        }
+        if (builder != null)
+            outState.putParcelable(Builder.class.getSimpleName(), builder);
     }
 
 
@@ -194,7 +187,7 @@ public class CustomAlertDialogue extends DialogFragment {
     }
 
 
-    public static class Builder implements Serializable {
+    public static class Builder implements Parcelable {
 
         private String positiveText;
         private String negativeText;
@@ -233,6 +226,38 @@ public class CustomAlertDialogue extends DialogFragment {
         private String[] destructive;
         private String[] others;
         private AdapterView.OnItemClickListener onItemClickListener;
+
+        protected Builder(Parcel in) {
+            positiveText = in.readString();
+            negativeText = in.readString();
+            title = in.readString();
+            message = in.readString();
+            body = in.readString();
+            autoHide = in.readByte() != 0;
+            cancelable = in.readByte() != 0;
+            timeToHide = in.readInt();
+            positiveTextColor = in.readInt();
+            backgroundColor = in.readInt();
+            negativeColor = in.readInt();
+            titleColor = in.readInt();
+            subtitleColor = in.readInt();
+            messageColor = in.readInt();
+            cancel = in.readString();
+            destructive = in.createStringArray();
+            others = in.createStringArray();
+        }
+
+        public static final Creator<Builder> CREATOR = new Creator<Builder>() {
+            @Override
+            public Builder createFromParcel(Parcel in) {
+                return new Builder(in);
+            }
+
+            @Override
+            public Builder[] newArray(int size) {
+                return new Builder[size];
+            }
+        };
 
         public Builder setContext(Context context) {
             this.context = context;
@@ -486,15 +511,20 @@ public class CustomAlertDialogue extends DialogFragment {
         public Dialog show() {
             return CustomAlertDialogue.getInstance().show(((Activity) context), this);
         }
-    }
 
-
-    @Override
-    public void onPause() {
-        if (isAdded() && getActivity() != null) {
-            builder = null;
+        @Override
+        public int describeContents() {
+            return 0;
         }
-        super.onPause();
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+        }
+    }
+    
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 
     public interface OnPositiveClicked {
