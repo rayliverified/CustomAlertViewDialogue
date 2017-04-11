@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
     <View
         android:layout_width="match_parent"
-        android:background="@color/bgColor_divier"
+        android:background="@color/divider"
         android:layout_height="1dp"/>
     <TextView
         android:id="@+id/alerttext"

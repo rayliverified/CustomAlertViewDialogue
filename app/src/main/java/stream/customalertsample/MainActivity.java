@@ -1,7 +1,5 @@
 package stream.customalertsample;
 
-import android.app.Dialog;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
                         .setStyle(CustomAlertDialogue.Style.ACTIONSHEET)
                         .setTitle("Custom Actionsheet")
-                        .setMessage("This is a Custom Actionsheet.")
                         .setCancelText("Cancel")
                         .setDestructive(destructive)
                         .setOthers(other)

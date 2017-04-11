@@ -1,6 +1,7 @@
 package stream.customdialogue;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class CustomActionsheetAdapter extends BaseAdapter{
         if(view==null){
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             view=inflater.inflate(R.layout.alertbutton, null);
-            holder=creatHolder(view);
+            holder= createHolder(view);
             view.setTag(holder);
         }
         else{
@@ -51,22 +52,23 @@ public class CustomActionsheetAdapter extends BaseAdapter{
         holder.UpdateUI(parent.getContext(),data,position);
         return view;
     }
-    public Holder creatHolder(View view){
+    public Holder createHolder(View view){
         return new Holder(view);
     }
+
     class Holder {
-        private TextView tvAlert;
+        private TextView buttonText;
 
         public Holder(View view){
-            tvAlert = (TextView) view.findViewById(R.id.alerttext);
+            buttonText = (TextView) view.findViewById(R.id.alerttext);
         }
         public void UpdateUI(Context context,String data,int position){
-            tvAlert.setText(data);
+            buttonText.setText(data);
             if (mDestructive!= null && mDestructive.contains(data)){
-                tvAlert.setTextColor(context.getResources().getColor(R.color.negative));
+                buttonText.setTextColor(ContextCompat.getColor(context, R.color.negative));
             }
             else{
-                tvAlert.setTextColor(context.getResources().getColor(R.color.positive));
+                buttonText.setTextColor(ContextCompat.getColor(context, R.color.positive));
             }
         }
     }

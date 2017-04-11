@@ -14,10 +14,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +33,7 @@ public class CustomAlertDialogue extends DialogFragment {
     private OnItemClickListener onItemClickListener;
     private Builder builder;
     private Style style = Style.DIALOGUE;
+    private Integer gravity = Gravity.CENTER;
     private static CustomAlertDialogue instance = new CustomAlertDialogue();
 
     public static CustomAlertDialogue getInstance() {
@@ -71,6 +75,46 @@ public class CustomAlertDialogue extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        if (builder.getStyle() != null)
+        {
+            style = builder.getStyle();
+        }
+
+        switch (style)
+        {
+            case DIALOGUE:
+                wlp.windowAnimations = R.style.CustomDialogAnimation;
+                wlp.gravity = Gravity.CENTER;
+                break;
+            case ACTIONSHEET:
+                wlp.windowAnimations = R.style.CustomActionsheetAnimation;
+                wlp.gravity = Gravity.BOTTOM;
+                break;
+            case SELECTOR:
+                wlp.windowAnimations = R.style.CustomDialogAnimation;
+                wlp.gravity = Gravity.CENTER;
+                break;
+        }
+
+        if (builder.getGravity() != null)
+        {
+            wlp.gravity = builder.getGravity();
+            switch (gravity)
+            {
+                case Gravity.CENTER:
+                    wlp.windowAnimations = R.style.CustomDialogAnimation;
+                    break;
+                case Gravity.BOTTOM:
+                    wlp.windowAnimations = R.style.CustomActionsheetAnimation;
+                    break;
+            }
+        }
+
+        window.setAttributes(wlp);
+
         return dialog;
     }
 
@@ -174,8 +218,8 @@ public class CustomAlertDialogue extends DialogFragment {
 
             //Add a divider between buttons if button exists.
             View divier = new View(view.getContext());
-            divier.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.bgColor_divier));
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)view.getContext().getResources().getDimension(R.dimen.size_divier), LinearLayout.LayoutParams.MATCH_PARENT);
+            divier.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.divider));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)view.getContext().getResources().getDimension(R.dimen.size_divider), LinearLayout.LayoutParams.MATCH_PARENT);
             alertButtons.addView(divier,params);
 
             View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alertbutton, null);
@@ -242,62 +286,55 @@ public class CustomAlertDialogue extends DialogFragment {
 
     public static class Builder implements Parcelable {
 
-        private String positiveText;
-        private String negativeText;
-
         private String title;
         private String message;
-        private String body;
+        private String positiveText;
+        private String negativeText;
+        private String cancelText;
+
+        private int titleColor;
+        private int messageColor;
+        private int positiveColor;
+        private int negativeColor;
+        private int backgroundColor;
+        private int timeToHide;
+
+        private Typeface titleFont;
+        private Typeface messageFont;
+        private Typeface positiveTypeface;
+        private Typeface negativeTypeface;
+        private Typeface alertTypeface;
 
         private OnPositiveClicked onPositiveClicked;
         private OnNegativeClicked onNegativeClicked;
 
-        private boolean autoHide;
-        private boolean cancelable = true;
-
-        private int timeToHide;
-        private int positiveTextColor;
-        private int backgroundColor;
-        private int negativeColor;
-        private int titleColor;
-        private int subtitleColor;
-        private int messageColor;
-
-        private Typeface titleFont;
-        private Typeface subTitleFont;
-        private Typeface messageFont;
-        private Typeface positiveButtonFont;
-        private Typeface negativeTypeface;
-        private Typeface alertFont;
-
-        private Context context;
-
-        private PanelGravity buttonsGravity;
-
-        private Style style;
-        private String cancel;
         private ArrayList<String> destructive;
         private ArrayList<String> others;
         private AdapterView.OnItemClickListener onItemClickListener;
 
+        private boolean autoHide;
+        private boolean cancelable = true;
+
+        private Integer gravity;
+        private Style style;
+        private Context context;
+
         protected Builder(Parcel in) {
-            positiveText = in.readString();
-            negativeText = in.readString();
             title = in.readString();
             message = in.readString();
-            body = in.readString();
-            autoHide = in.readByte() != 0;
-            cancelable = in.readByte() != 0;
-            timeToHide = in.readInt();
-            positiveTextColor = in.readInt();
-            backgroundColor = in.readInt();
-            negativeColor = in.readInt();
+            positiveText = in.readString();
+            negativeText = in.readString();
+            cancelText = in.readString();
             titleColor = in.readInt();
-            subtitleColor = in.readInt();
             messageColor = in.readInt();
-            cancel = in.readString();
+            positiveColor = in.readInt();
+            negativeColor = in.readInt();
+            backgroundColor = in.readInt();
+            timeToHide = in.readInt();
             destructive = in.createStringArrayList();
             others = in.createStringArrayList();
+            autoHide = in.readByte() != 0;
+            cancelable = in.readByte() != 0;
         }
 
         public static final Creator<Builder> CREATOR = new Creator<Builder>() {
@@ -316,6 +353,9 @@ public class CustomAlertDialogue extends DialogFragment {
             this.context = context;
             return this;
         }
+        public Context getContext() {
+            return context;
+        }
 
         public Builder setStyle(Style style) {
             if(style != null) {
@@ -323,247 +363,191 @@ public class CustomAlertDialogue extends DialogFragment {
             }
             return this;
         }
-
         public Style getStyle() { return style; }
 
-        public Builder setCancelText(String cancel) {
-            this.cancel = cancel;
+        public Builder setGravity(Integer gravity) {
+            this.gravity = gravity;
             return this;
         }
+        public Integer getGravity() { return gravity; }
 
-        public Builder setDestructive(ArrayList<String> destructive) {
-            this.destructive = destructive;
+        public Builder setTitle(String title) {
+            this.title = title;
             return this;
         }
+        public String getTitle() { return title; }
 
-        public Builder setOthers(ArrayList<String> others) {
-            this.others = others;
+        public Builder setMessage(String message) {
+            this.message = message;
             return this;
         }
-
-        public Builder setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
-            this.onItemClickListener = onItemClickListener;
-            return this;
-        }
-
-        public PanelGravity getButtonsGravity() {
-            return buttonsGravity;
-        }
-
-        public Builder setButtonsGravity(PanelGravity buttonsGravity) {
-            this.buttonsGravity = buttonsGravity;
-            return this;
-        }
-
-        public Typeface getAlertFont() {
-            return alertFont;
-        }
-
-        public Builder setAlertFont(String alertFont) {
-            this.alertFont = Typeface.createFromAsset(context.getAssets(), alertFont);
-            return this;
-        }
-
-        public Typeface getPositiveTypeface() {
-            return positiveButtonFont;
-        }
-
-        public Builder setPositiveTypeface(Typeface positiveTypeface) {
-            this.positiveButtonFont = positiveTypeface;
-            return this;
-        }
-
-        public Typeface getNegativeTypeface() {
-            return negativeTypeface;
-        }
-
-        public Builder setNegativeTypeface(Typeface negativeTypeface) {
-            this.negativeTypeface = negativeTypeface;
-            return this;
-        }
-
-        public Typeface getTitleFont() {
-            return titleFont;
-        }
-
-
-        public Builder setTitleFont(String titleFontPath) {
-            this.titleFont = Typeface.createFromAsset(context.getAssets(), titleFontPath);
-            return this;
-        }
-
-        public Typeface getSubTitleFont() {
-            return subTitleFont;
-        }
-
-        public Builder setSubTitleFont(String subTitleFontPath) {
-            this.subTitleFont = Typeface.createFromAsset(context.getAssets(), subTitleFontPath);
-            return this;
-        }
-
-        public Typeface getMessageFont() {
-            return messageFont;
-        }
-
-        public Builder setMessageFont(String bodyFontPath) {
-            this.messageFont = Typeface.createFromAsset(context.getAssets(), bodyFontPath);
-            return this;
-        }
-
-
-        public int getTimeToHide() {
-            return timeToHide;
-        }
-
-        public Builder setTimeToHide(int timeToHide) {
-            this.timeToHide = timeToHide;
-            return this;
-        }
-
-        public boolean isAutoHide() {
-            return autoHide;
-        }
-
-        public Builder setAutoHide(boolean autoHide) {
-            this.autoHide = autoHide;
-            return this;
-        }
-
-        public Context getContext() {
-            return context;
-        }
-
-        public Builder setActivity(Context context) {
-            this.context = context;
-            return this;
-        }
-
-        public Builder(Context context) {
-            this.context = context;
-        }
-
-        public String getCancelText() { return cancel; }
-
-        public ArrayList<String> getDestructive() { return destructive; }
-
-        public ArrayList<String> getOthers() { return others; }
-
-        public int getPositiveColor() {
-            return positiveTextColor;
-        }
-
-        public Builder setPositiveColor(int positiveTextColor) {
-            this.positiveTextColor = positiveTextColor;
-            return this;
-        }
-
-
-        public int getBackgroundColor() {
-            return backgroundColor;
-        }
-
-        public Builder setBackgroundColor(int backgroundColor) {
-            this.backgroundColor = backgroundColor;
-            return this;
-        }
-
-        public int getNegativeColor() {
-            return negativeColor;
-        }
-
-        public Builder setNegativeColor(int negativeColor) {
-            this.negativeColor = negativeColor;
-            return this;
-        }
-
-
-        public int getTitleColor() {
-            return titleColor;
-        }
-
-        public Builder setTitleColor(int titleColor) {
-            this.titleColor = titleColor;
-            return this;
-        }
-
-        public int getSubtitleColor() {
-            return subtitleColor;
-        }
-
-        public Builder setSubtitleColor(int subtitleColor) {
-            this.subtitleColor = subtitleColor;
-            return this;
-        }
-
-        public int getMessageColor() {
-            return messageColor;
-        }
-
-        public Builder setMessageColor(int messageColor) {
-            this.messageColor = messageColor;
-            return this;
-        }
-
-        public String getPositiveText() {
-            return positiveText;
+        public String getMessage() {
+            return message;
         }
 
         public Builder setPositiveText(String positiveButtonText) {
             this.positiveText = positiveButtonText;
             return this;
         }
-
-        public String getNegativeText() {
-            return negativeText;
+        public String getPositiveText() {
+            return positiveText;
         }
 
         public Builder setNegativeText(String negativeText) {
             this.negativeText = negativeText;
             return this;
         }
-
-        public String getTitle() {
-            return title;
+        public String getNegativeText() {
+            return negativeText;
         }
 
-        public Builder setTitle(String title) {
-            this.title = title;
+        public Builder setCancelText(String cancel) {
+            this.cancelText = cancel;
             return this;
         }
+        public String getCancelText() { return cancelText; }
 
-        public String getMessage() {
-            return message;
-        }
-
-        public Builder setMessage(String message) {
-            this.message = message;
+        public Builder setTitleColor(int titleColor) {
+            this.titleColor = titleColor;
             return this;
         }
-
-        public boolean getCancelable() { return cancelable; }
-
-        public Builder setCancelable(boolean cancelable) {
-            this.cancelable = cancelable;
-            return this;
+        public int getTitleColor() {
+            return titleColor;
         }
 
-        public OnPositiveClicked getOnPositiveClicked() {
-            return onPositiveClicked;
+        public Builder setMessageColor(int messageColor) {
+            this.messageColor = messageColor;
+            return this;
+        }
+        public int getMessageColor() {
+            return messageColor;
+        }
+
+        public Builder setPositiveColor(int positiveTextColor) {
+            this.positiveColor = positiveTextColor;
+            return this;
+        }
+        public int getPositiveColor() {
+            return positiveColor;
+        }
+
+        public Builder setNegativeColor(int negativeColor) {
+            this.negativeColor = negativeColor;
+            return this;
+        }
+        public int getNegativeColor() {
+            return negativeColor;
+        }
+
+        public Builder setBackgroundColor(int backgroundColor) {
+            this.backgroundColor = backgroundColor;
+            return this;
+        }
+        public int getBackgroundColor() {
+            return backgroundColor;
+        }
+
+        public Builder setTimeToHide(int timeToHide) {
+            this.timeToHide = timeToHide;
+            return this;
+        }
+        public int getTimeToHide() {
+            return timeToHide;
+        }
+
+        public Builder setTitleFont(String titleFontPath) {
+            this.titleFont = Typeface.createFromAsset(context.getAssets(), titleFontPath);
+            return this;
+        }
+        public Typeface getTitleFont() {
+            return titleFont;
+        }
+
+        public Builder setMessageFont(String bodyFontPath) {
+            this.messageFont = Typeface.createFromAsset(context.getAssets(), bodyFontPath);
+            return this;
+        }
+        public Typeface getMessageFont() {
+            return messageFont;
+        }
+
+        public Builder setPositiveTypeface(Typeface positiveTypeface) {
+            this.positiveTypeface = positiveTypeface;
+            return this;
+        }
+        public Typeface getPositiveTypeface() {
+            return positiveTypeface;
+        }
+
+        public Builder setNegativeTypeface(Typeface negativeTypeface) {
+            this.negativeTypeface = negativeTypeface;
+            return this;
+        }
+        public Typeface getNegativeTypeface() {
+            return negativeTypeface;
+        }
+
+        public Builder setAlertTypeface(String alertTypeface) {
+            this.alertTypeface = Typeface.createFromAsset(context.getAssets(), alertTypeface);
+            return this;
+        }
+        public Typeface getAlertTypeface() {
+            return alertTypeface;
         }
 
         public Builder setOnPositiveClicked(OnPositiveClicked onPositiveClicked) {
             this.onPositiveClicked = onPositiveClicked;
             return this;
         }
-
-        public OnNegativeClicked getOnNegativeClicked() {
-            return onNegativeClicked;
+        public OnPositiveClicked getOnPositiveClicked() {
+            return onPositiveClicked;
         }
 
         public Builder setOnNegativeClicked(OnNegativeClicked onNegativeClicked) {
             this.onNegativeClicked = onNegativeClicked;
             return this;
         }
+        public OnNegativeClicked getOnNegativeClicked() {
+            return onNegativeClicked;
+        }
+
+        public Builder setDestructive(ArrayList<String> destructive) {
+            this.destructive = destructive;
+            return this;
+        }
+        public ArrayList<String> getDestructive() { return destructive; }
+
+        public Builder setOthers(ArrayList<String> others) {
+            this.others = others;
+            return this;
+        }
+        public ArrayList<String> getOthers() { return others; }
+
+        public Builder setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
+            this.onItemClickListener = onItemClickListener;
+            return this;
+        }
+
+        public Builder setAutoHide(boolean autoHide) {
+            this.autoHide = autoHide;
+            return this;
+        }
+        public boolean isAutoHide() {
+            return autoHide;
+        }
+
+        public Builder setCancelable(boolean cancelable) {
+            this.cancelable = cancelable;
+            return this;
+        }
+        public boolean getCancelable() { return cancelable; }
+
+        public Builder setActivity(Context context) {
+            this.context = context;
+            return this;
+        }
+
+        public Builder(Context context) { this.context = context; }
 
         public Builder build() {
             return this;
@@ -600,11 +584,5 @@ public class CustomAlertDialogue extends DialogFragment {
         DIALOGUE,
         ACTIONSHEET,
         SELECTOR
-    }
-
-    public enum PanelGravity {
-        LEFT,
-        RIGHT,
-        CENTER
     }
 }
