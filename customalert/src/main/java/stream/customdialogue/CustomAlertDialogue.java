@@ -20,10 +20,14 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class CustomAlertDialogue extends DialogFragment {
     public static final String TAG = CustomAlertDialogue.class.getSimpleName();
+    private OnItemClickListener onItemClickListener;
     private Builder builder;
     private Style style = Style.DIALOGUE;
     private static CustomAlertDialogue instance = new CustomAlertDialogue();
@@ -74,14 +78,22 @@ public class CustomAlertDialogue extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        if (builder.getStyle() != null)
+        {
+            style = builder.getStyle();
+        }
+
         switch (style)
         {
             case DIALOGUE:
                 Log.d("Dialogue Layout", "Dialogue");
-                return inflater.inflate(R.layout.dialog_alert, container, false);
+                return inflater.inflate(R.layout.alert, container, false);
+            case ACTIONSHEET:
+                Log.d("Dialogue Layout", "Dialogue");
+                return inflater.inflate(R.layout.actionsheet, container,false);
             case SELECTOR:
                 Log.d("Dialogue Layout", "Selector");
-                return inflater.inflate(R.layout.dialog_alert, container, false);
+                return inflater.inflate(R.layout.alert, container, false);
         }
 
         return null;
@@ -92,40 +104,48 @@ public class CustomAlertDialogue extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         if (builder != null) {
 
-            //Common elements
-            title = (TextView) view.findViewById(R.id.title);
-            message = (TextView) view.findViewById(R.id.message);
-            if (builder.getTitle() != null) {
-                title.setText(builder.getTitle());
-            } else {
-                title.setVisibility(View.GONE);
-            }
-            if (builder.getMessage() != null) {
-                message.setText(builder.getMessage());
-            } else {
-                message.setVisibility(View.GONE);
-            }
-
-            if (builder.isAutoHide()) {
-                int time = builder.getTimeToHide() != 0 ? builder.getTimeToHide() : 10000;
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (isAdded() && getActivity() != null)
-                            dismiss();
-                    }
-                }, time);
-            }
+            initCommonView(view);
 
             //Style specific elements
             if (style == Style.DIALOGUE)
             {
-                initDialogueViews(view);
+                initDialogueView(view);
+            }
+            if (style == Style.ACTIONSHEET)
+            {
+                initActionsheetView(view);
             }
         }
     }
 
-    private void initDialogueViews(View view) {
+    private void initCommonView(View view) {
+        //Common elements
+        title = (TextView) view.findViewById(R.id.title);
+        message = (TextView) view.findViewById(R.id.message);
+        if (builder.getTitle() != null) {
+            title.setText(builder.getTitle());
+        } else {
+            title.setVisibility(View.GONE);
+        }
+        if (builder.getMessage() != null) {
+            message.setText(builder.getMessage());
+        } else {
+            message.setVisibility(View.GONE);
+        }
+
+        if (builder.isAutoHide()) {
+            int time = builder.getTimeToHide() != 0 ? builder.getTimeToHide() : 10000;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (isAdded() && getActivity() != null)
+                        dismiss();
+                }
+            }, time);
+        }
+    }
+
+    private void initDialogueView(View view) {
 
         ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewStubHorizontal);
         viewStub.inflate();
@@ -133,7 +153,7 @@ public class CustomAlertDialogue extends DialogFragment {
         LinearLayout alertButtons = (LinearLayout) view.findViewById(R.id.alertButtons);
 
         if (builder.getNegativeText() != null) {
-            View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.item_alertbutton, null);
+            View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alertbutton, null);
             TextView negativeText = (TextView) negativeButton.findViewById(R.id.alerttext);
             negativeText.setClickable(true);
             negativeText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
@@ -158,7 +178,7 @@ public class CustomAlertDialogue extends DialogFragment {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)view.getContext().getResources().getDimension(R.dimen.size_divier), LinearLayout.LayoutParams.MATCH_PARENT);
             alertButtons.addView(divier,params);
 
-            View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.item_alertbutton, null);
+            View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alertbutton, null);
             TextView positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
             positiveText.setClickable(true);
             positiveText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
@@ -174,6 +194,42 @@ public class CustomAlertDialogue extends DialogFragment {
             alertButtons.addView(positiveButton, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         }
+    }
+
+    private void initActionsheetView(View view) {
+
+        TextView cancelButton = (TextView) view.findViewById(R.id.cancel);
+        if(builder.getCancelText() != null){
+            cancelButton.setVisibility(View.VISIBLE);
+            cancelButton.setText(builder.getCancelText());
+        }
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        ArrayList<String> mData = new ArrayList<String>();
+        if (builder.getDestructive() != null)
+        {
+            mData.addAll(builder.getDestructive());
+        }
+        if (builder.getOthers() != null)
+        {
+            mData.addAll(builder.getOthers());
+        }
+        ListView alertButtonListView = (ListView) view.findViewById(R.id.listview);
+        CustomActionsheetAdapter adapter = new CustomActionsheetAdapter(mData, builder.getDestructive());
+        alertButtonListView.setAdapter(adapter);
+        alertButtonListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if(onItemClickListener != null)
+                    onItemClickListener.onItemClick(CustomAlertDialogue.this, position);
+                dismiss();
+            }
+        });
     }
 
     private Dialog show(Activity activity, Builder builder) {
@@ -220,8 +276,8 @@ public class CustomAlertDialogue extends DialogFragment {
 
         private Style style;
         private String cancel;
-        private String[] destructive;
-        private String[] others;
+        private ArrayList<String> destructive;
+        private ArrayList<String> others;
         private AdapterView.OnItemClickListener onItemClickListener;
 
         protected Builder(Parcel in) {
@@ -240,8 +296,8 @@ public class CustomAlertDialogue extends DialogFragment {
             subtitleColor = in.readInt();
             messageColor = in.readInt();
             cancel = in.readString();
-            destructive = in.createStringArray();
-            others = in.createStringArray();
+            destructive = in.createStringArrayList();
+            others = in.createStringArrayList();
         }
 
         public static final Creator<Builder> CREATOR = new Creator<Builder>() {
@@ -268,17 +324,19 @@ public class CustomAlertDialogue extends DialogFragment {
             return this;
         }
 
+        public Style getStyle() { return style; }
+
         public Builder setCancelText(String cancel) {
             this.cancel = cancel;
             return this;
         }
 
-        public Builder setDestructive(String... destructive) {
+        public Builder setDestructive(ArrayList<String> destructive) {
             this.destructive = destructive;
             return this;
         }
 
-        public Builder setOthers(String[] others) {
+        public Builder setOthers(ArrayList<String> others) {
             this.others = others;
             return this;
         }
@@ -383,6 +441,12 @@ public class CustomAlertDialogue extends DialogFragment {
         public Builder(Context context) {
             this.context = context;
         }
+
+        public String getCancelText() { return cancel; }
+
+        public ArrayList<String> getDestructive() { return destructive; }
+
+        public ArrayList<String> getOthers() { return others; }
 
         public int getPositiveColor() {
             return positiveTextColor;
@@ -534,6 +598,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
     public enum Style{
         DIALOGUE,
+        ACTIONSHEET,
         SELECTOR
     }
 

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="bgColor_divier">#d7d7db</color>
-    <color name="textColor_alert_button_cancel">#007aff</color>
-    <color name="textColor_alert_button_destructive">#ff3b30</color>
-    <color name="textColor_alert_button_others">#007aff</color>
+    <color name="negative">#ff3b30</color>
+    <color name="positive">#007aff</color>
+    <color name="others">#007aff</color>
     <color name="bgColor_alert_button_press">#EAEAEA</color>
+    <color name="bgColor_alertview_alert">#f8f8f8</color>
+    <color name="textColor_actionsheet_title">#8f8f8f</color>
+    <color name="textColor_actionsheet_msg">#8f8f8f</color>
+    <color name="bgColor_actionsheet_cancel_nor">#ffffff</color>
 </resources>

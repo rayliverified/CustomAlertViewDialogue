@@ -11,9 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import stream.customdialogue.CustomAlertDialogue;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+import stream.customdialogue.CustomAlertDialogue;
+import stream.customdialogue.OnItemClickListener;
+
+public class MainActivity extends AppCompatActivity implements OnItemClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,31 +25,25 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final ArrayList<String> destructive = new ArrayList<>();
+        destructive.add("Choice 1");
+
+        final ArrayList<String> other = new ArrayList<>();
+        other.add("Choice 2");
+        other.add("Choice 3");
+        other.add("Choice 4");
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
-                        .setStyle(CustomAlertDialogue.Style.DIALOGUE)
-                        .setTitle("Custom Alert")
-                        .setMessage("This is a Custom Alert. Press OK to confirm. ")
-                        .setNegativeText("Cancel")
-                        .setPositiveText("OK")
-                        .setPositiveTypeface(Typeface.DEFAULT_BOLD)
-                        .setNegativeColor(R.color.textColor_alert_button_destructive)
-                        .setPositiveColor(R.color.textColor_alert_button_cancel)
-                        .setOnPositiveClicked(new CustomAlertDialogue.OnPositiveClicked() {
-                            @Override
-                            public void OnClick(View view, Dialog dialog) {
-                                Toast.makeText(MainActivity.this, "Positive", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setOnNegativeClicked(new CustomAlertDialogue.OnNegativeClicked() {
-                            @Override
-                            public void OnClick(View view, Dialog dialog) {
-                                Toast.makeText(MainActivity.this, "Negative", Toast.LENGTH_SHORT).show();
-                            }
-                        })
+                        .setStyle(CustomAlertDialogue.Style.ACTIONSHEET)
+                        .setTitle("Custom Actionsheet")
+                        .setMessage("This is a Custom Actionsheet.")
+                        .setCancelText("Cancel")
+                        .setDestructive(destructive)
+                        .setOthers(other)
                         .build();
                 alert.show();
             }
@@ -73,5 +70,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(Object o, int position) {
+        Toast.makeText(this, "Clicked" + position, Toast.LENGTH_SHORT).show();
     }
 }
