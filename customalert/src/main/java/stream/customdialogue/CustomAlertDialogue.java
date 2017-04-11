@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 public class CustomAlertDialogue extends DialogFragment {
     public static final String TAG = CustomAlertDialogue.class.getSimpleName();
-    private OnItemClickListener onItemClickListener;
     private Builder builder;
     private Style style = Style.DIALOGUE;
     private Integer gravity = Gravity.CENTER;
@@ -246,13 +245,14 @@ public class CustomAlertDialogue extends DialogFragment {
         if(builder.getCancelText() != null){
             cancelButton.setVisibility(View.VISIBLE);
             cancelButton.setText(builder.getCancelText());
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    builder.getOnCancelClicked().OnClick(v, getDialog());
+                }
+            });
+
         }
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
 
         ArrayList<String> mData = new ArrayList<String>();
         if (builder.getDestructive() != null)
@@ -266,14 +266,10 @@ public class CustomAlertDialogue extends DialogFragment {
         ListView alertButtonListView = (ListView) view.findViewById(R.id.listview);
         CustomActionsheetAdapter adapter = new CustomActionsheetAdapter(mData, builder.getDestructive());
         alertButtonListView.setAdapter(adapter);
-        alertButtonListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if(onItemClickListener != null)
-                    onItemClickListener.onItemClick(CustomAlertDialogue.this, position);
-                dismiss();
-            }
-        });
+        if (builder.getOnItemClickListener() != null)
+        {
+            alertButtonListView.setOnItemClickListener(builder.getOnItemClickListener());
+        }
     }
 
     private Dialog show(Activity activity, Builder builder) {
@@ -307,6 +303,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
         private OnPositiveClicked onPositiveClicked;
         private OnNegativeClicked onNegativeClicked;
+        private OnCancelClicked onCancelClicked;
 
         private ArrayList<String> destructive;
         private ArrayList<String> others;
@@ -511,6 +508,14 @@ public class CustomAlertDialogue extends DialogFragment {
             return onNegativeClicked;
         }
 
+        public Builder setOnCancelClicked(OnCancelClicked onCancelClicked) {
+            this.onCancelClicked = onCancelClicked;
+            return this;
+        }
+        public OnCancelClicked getOnCancelClicked() {
+            return onCancelClicked;
+        }
+
         public Builder setDestructive(ArrayList<String> destructive) {
             this.destructive = destructive;
             return this;
@@ -527,6 +532,7 @@ public class CustomAlertDialogue extends DialogFragment {
             this.onItemClickListener = onItemClickListener;
             return this;
         }
+        public AdapterView.OnItemClickListener getOnItemClickListener() { return onItemClickListener; }
 
         public Builder setAutoHide(boolean autoHide) {
             this.autoHide = autoHide;
@@ -577,6 +583,10 @@ public class CustomAlertDialogue extends DialogFragment {
     }
 
     public interface OnNegativeClicked {
+        void OnClick(View view, Dialog dialog);
+    }
+
+    public interface OnCancelClicked {
         void OnClick(View view, Dialog dialog);
     }
 
