@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.os.ParcelableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,8 +21,6 @@ import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.io.Serializable;
 
 public class CustomAlertDialogue extends DialogFragment {
     public static final String TAG = CustomAlertDialogue.class.getSimpleName();
@@ -157,7 +154,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
             //Add a divider between buttons if button exists.
             View divier = new View(view.getContext());
-            divier.setBackgroundColor(view.getContext().getResources().getColor(R.color.bgColor_divier));
+            divier.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.bgColor_divier));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)view.getContext().getResources().getDimension(R.dimen.size_divier), LinearLayout.LayoutParams.MATCH_PARENT);
             alertButtons.addView(divier,params);
 
@@ -521,7 +518,7 @@ public class CustomAlertDialogue extends DialogFragment {
         public void writeToParcel(Parcel parcel, int i) {
         }
     }
-    
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

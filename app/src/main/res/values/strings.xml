@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Fancy Alert Sample</string>
+    <string name="app_name">Custom AlertView Dialogue</string>
     <string name="action_settings">Settings</string>
 </resources>
