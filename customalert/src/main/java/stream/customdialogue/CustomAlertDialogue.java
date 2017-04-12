@@ -160,6 +160,10 @@ public class CustomAlertDialogue extends DialogFragment {
             {
                 initActionsheetView(view);
             }
+            if (style == Style.SELECTOR)
+            {
+                initSelectorView(view);
+            }
         }
     }
 
@@ -256,6 +260,17 @@ public class CustomAlertDialogue extends DialogFragment {
 
         }
 
+        initListView(view);
+    }
+
+    private void initSelectorView(View view) {
+
+        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewStubVertical);
+        viewStub.inflate();
+        initListView(view);
+    }
+
+    private void initListView(View view) {
         ArrayList<String> mData = new ArrayList<String>();
         if (builder.getDestructive() != null)
         {
@@ -604,8 +619,8 @@ public class CustomAlertDialogue extends DialogFragment {
         private List<String> mDestructive;
 
         public CustomActionsheetAdapter(List<String> datas, List<String> destructive){
-            this.mDatas =datas;
-            this.mDestructive =destructive;
+            this.mDatas = datas;
+            this.mDestructive = destructive;
         }
 
         @Override
@@ -625,19 +640,20 @@ public class CustomAlertDialogue extends DialogFragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            String data= mDatas.get(position);
-            Holder holder=null;
-            View view =convertView;
-            if(view==null){
+
+            String data = mDatas.get(position);
+            Holder holder = null;
+            View view = convertView;
+            if(view == null){
                 LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-                view=inflater.inflate(R.layout.alertbutton, null);
-                holder= createHolder(view);
+                view =inflater.inflate(R.layout.alertbutton, null);
+                holder = createHolder(view);
                 view.setTag(holder);
             }
             else{
-                holder=(Holder) view.getTag();
+                holder = (Holder) view.getTag();
             }
-            holder.UpdateUI(parent.getContext(),data,position);
+            holder.UpdateUI(parent.getContext(), data, position);
             return view;
         }
         public Holder createHolder(View view){
@@ -645,13 +661,26 @@ public class CustomAlertDialogue extends DialogFragment {
         }
 
         class Holder {
+
+            private View buttonDivider;
             private TextView buttonText;
 
             public Holder(View view){
                 buttonText = (TextView) view.findViewById(R.id.alerttext);
+                buttonDivider = (View) view.findViewById(R.id.button_divider);
             }
-            public void UpdateUI(Context context,String data,int position){
+            public void UpdateUI(Context context, String data, int position){
+
                 buttonText.setText(data);
+                if (position == 0)
+                {
+                    buttonDivider.setVisibility(View.GONE);
+                }
+                else
+                {
+                    buttonDivider.setVisibility(View.VISIBLE);
+                }
+
                 if (mDestructive!= null && mDestructive.contains(data)){
                     buttonText.setTextColor(ContextCompat.getColor(context, R.color.negative));
                 }

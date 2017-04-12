@@ -32,29 +32,31 @@ public class MainActivity extends AppCompatActivity{
         other.add("Choice 2");
         other.add("Choice 3");
         other.add("Choice 4");
+        other.add("Choice 5");
+        other.add("Choice 6");
+        other.add("Choice 7");
+        other.add("Choice 8");
+        other.add("Choice 9");
+        other.add("Choice 10");
+        other.add("Choice 11");
+        other.add("Choice 12");
+        other.add("Choice 13");
+        other.add("Choice 14");
+        other.add("Choice 15");
+        other.add("Choice 16");
+        other.add("Choice 17");
+        other.add("Choice 18");
+        other.add("Choice 19");
+        other.add("Choice 20");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
-                        .setStyle(CustomAlertDialogue.Style.ACTIONSHEET)
-                        .setTitle("Custom Actionsheet")
-                        .setCancelText("Cancel")
-                        .setOnCancelClicked(new CustomAlertDialogue.OnCancelClicked() {
-                            @Override
-                            public void OnClick(View view, Dialog dialog) {
-                                dialog.dismiss();
-                            }
-                        })
+                        .setStyle(CustomAlertDialogue.Style.SELECTOR)
                         .setDestructive(destructive)
                         .setOthers(other)
-                        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                Log.d("Click Listener", String.valueOf(i));
-                            }
-                        })
                         .build();
                 alert.show();
             }

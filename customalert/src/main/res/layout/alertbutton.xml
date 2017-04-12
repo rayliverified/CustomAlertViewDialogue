@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <View
+        android:id="@+id/button_divider"
         android:layout_width="match_parent"
         android:background="@color/divider"
         android:layout_height="1dp"/>

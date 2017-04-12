@@ -6,5 +6,5 @@
             <corners android:bottomLeftRadius="@dimen/radius_dialogue" android:bottomRightRadius="@dimen/radius_dialogue"/>
         </shape>
     </item>
-    <item android:drawable="@android:color/transparent" />
+    <item android:drawable="@android:color/transparent"/>
 </selector>
