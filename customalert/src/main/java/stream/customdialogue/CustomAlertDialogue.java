@@ -222,10 +222,10 @@ public class CustomAlertDialogue extends DialogFragment {
         if (builder.getPositiveText() != null) {
 
             //Add a divider between buttons if button exists.
-            View divier = new View(view.getContext());
-            divier.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.divider));
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)view.getContext().getResources().getDimension(R.dimen.size_divider), LinearLayout.LayoutParams.MATCH_PARENT);
-            alertButtons.addView(divier,params);
+            View divider = new View(view.getContext());
+            divider.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.divider));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) view.getContext().getResources().getDimension(R.dimen.size_divider), LinearLayout.LayoutParams.MATCH_PARENT);
+            alertButtons.addView(divider, params);
 
             View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
             TextView positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
@@ -257,7 +257,20 @@ public class CustomAlertDialogue extends DialogFragment {
                     builder.getOnCancelClicked().OnClick(v, getDialog());
                 }
             });
+            if (builder.getCancelColor() != 0)
+            {
+                cancelButton.setTextColor(builder.getCancelColor());
+            }
+        }
 
+        if (builder.getTitle() != null || builder.getMessage() != null)
+        {
+            if (builder.getDestructive() != null || builder.getOthers() != null)
+            {
+                //Add a divider between header and listview
+                View header = (View) view.findViewById(R.id.header_divider);
+                header.setVisibility(View.VISIBLE);
+            }
         }
 
         initListView(view);
@@ -308,6 +321,7 @@ public class CustomAlertDialogue extends DialogFragment {
         private int messageColor;
         private int positiveColor;
         private int negativeColor;
+        private int cancelColor;
         private int backgroundColor;
         private int timeToHide;
 
@@ -342,6 +356,7 @@ public class CustomAlertDialogue extends DialogFragment {
             messageColor = in.readInt();
             positiveColor = in.readInt();
             negativeColor = in.readInt();
+            cancelColor = in.readInt();
             backgroundColor = in.readInt();
             timeToHide = in.readInt();
             destructive = in.createStringArrayList();
@@ -450,6 +465,14 @@ public class CustomAlertDialogue extends DialogFragment {
         }
         public int getNegativeColor() {
             return negativeColor;
+        }
+
+        public Builder setCancelColor(int cancelColor) {
+            this.cancelColor = cancelColor;
+            return this;
+        }
+        public int getCancelColor() {
+            return cancelColor;
         }
 
         public Builder setBackgroundColor(int backgroundColor) {

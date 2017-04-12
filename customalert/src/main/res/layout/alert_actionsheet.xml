@@ -36,11 +36,18 @@
             android:textSize="@dimen/text_message_size"
             android:textColor="@color/text_actionsheet_msg"/>
 
+        <View
+            android:id="@+id/header_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/divider"
+            android:visibility="gone"/>
+
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:listSelector="@drawable/bg_alertbutton_none"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@null"
