@@ -20,6 +20,8 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_margin_border"
+            android:layout_marginRight="@dimen/text_margin_border"
             android:layout_marginTop="@dimen/text_margin_border"
             android:layout_marginBottom="@dimen/text_title_message_space"
             android:gravity="center"

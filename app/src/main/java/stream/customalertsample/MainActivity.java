@@ -1,6 +1,7 @@
 package stream.customalertsample;
 
 import android.app.Dialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -54,9 +55,18 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
-                        .setStyle(CustomAlertDialogue.Style.SELECTOR)
-                        .setDestructive(destructive)
-                        .setOthers(other)
+                        .setStyle(CustomAlertDialogue.Style.DIALOGUE)
+                        .setTitle("Custom Alert Dialogue")
+                        .setMessage("This is a long description to test the dialogue's text wrapping functionality")
+                        .setNegativeText("OK")
+                        .setNegativeColor(R.color.negative)
+                        .setNegativeTypeface(Typeface.DEFAULT_BOLD)
+                        .setOnNegativeClicked(new CustomAlertDialogue.OnNegativeClicked() {
+                            @Override
+                            public void OnClick(View view, Dialog dialog) {
+                                dialog.dismiss();
+                            }
+                        })
                         .build();
                 alert.show();
             }

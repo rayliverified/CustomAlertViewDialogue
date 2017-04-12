@@ -2,8 +2,8 @@
     <dimen name="size_divider">1dp</dimen>
     <dimen name="radius_dialogue">10dp</dimen>
     <dimen name="radius_actionsheet">5dp</dimen>
-    <dimen name="dialogue_margin_side">50dp</dimen>
-    <dimen name="dialogue_margin_side_land">80dp</dimen>
+    <dimen name="dialogue_margin_side">30dp</dimen>
+    <dimen name="dialogue_margin_side_land">50dp</dimen>
     <dimen name="dialogue_margin_top">30dp</dimen>
     <dimen name="button_height">44dp</dimen>
     <dimen name="button_text_size">16sp</dimen>

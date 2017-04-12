@@ -135,7 +135,7 @@ public class CustomAlertDialogue extends DialogFragment {
                 return inflater.inflate(R.layout.alert, container, false);
             case ACTIONSHEET:
                 Log.d("Dialogue Layout", "Dialogue");
-                return inflater.inflate(R.layout.actionsheet, container,false);
+                return inflater.inflate(R.layout.alert_actionsheet, container,false);
             case SELECTOR:
                 Log.d("Dialogue Layout", "Selector");
                 return inflater.inflate(R.layout.alert, container, false);
@@ -202,7 +202,7 @@ public class CustomAlertDialogue extends DialogFragment {
         LinearLayout alertButtons = (LinearLayout) view.findViewById(R.id.alertButtons);
 
         if (builder.getNegativeText() != null) {
-            View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alertbutton, null);
+            View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
             TextView negativeText = (TextView) negativeButton.findViewById(R.id.alerttext);
             negativeText.setClickable(true);
             negativeText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
@@ -227,7 +227,7 @@ public class CustomAlertDialogue extends DialogFragment {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)view.getContext().getResources().getDimension(R.dimen.size_divider), LinearLayout.LayoutParams.MATCH_PARENT);
             alertButtons.addView(divier,params);
 
-            View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alertbutton, null);
+            View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
             TextView positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
             positiveText.setClickable(true);
             positiveText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
@@ -295,7 +295,6 @@ public class CustomAlertDialogue extends DialogFragment {
             show(((AppCompatActivity) activity).getSupportFragmentManager(), TAG);
         return getDialog();
     }
-
 
     public static class Builder implements Parcelable {
 
@@ -646,7 +645,7 @@ public class CustomAlertDialogue extends DialogFragment {
             View view = convertView;
             if(view == null){
                 LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-                view =inflater.inflate(R.layout.alertbutton, null);
+                view =inflater.inflate(R.layout.alert_button, null);
                 holder = createHolder(view);
                 view.setTag(holder);
             }

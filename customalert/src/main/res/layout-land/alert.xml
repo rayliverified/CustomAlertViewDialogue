@@ -8,24 +8,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dialogue_margin_side_land"
-        android:layout_marginRight="@dimen/dialogue_margin_side_land"
+        android:minWidth="200dp"
         android:layout_marginTop="@dimen/dialogue_margin_top"
         android:layout_marginBottom="@dimen/dialogue_margin_top"
         android:layout_gravity="center"
-        android:orientation="vertical"
-        android:background="@drawable/bg_alertview_alert">
+        android:background="@drawable/bg_alertview_alert"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_margin_border"
+            android:layout_marginRight="@dimen/text_margin_border"
             android:layout_marginTop="18dp"
             android:layout_marginBottom="6dp"
             android:gravity="center"
             android:text="Alert Title"
-            android:textColor="#000000"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_title_size"
+            android:textColor="@color/text_default"/>
 
         <TextView
             android:id="@+id/message"
@@ -36,8 +37,8 @@
             android:layout_marginBottom="14dp"
             android:gravity="center"
             android:text="Sample Alert Message"
-            android:textColor="#000000"
-            android:textSize="14sp"/>
+            android:textSize="@dimen/text_message_size"
+            android:textColor="@color/text_default"/>
 
         <ViewStub
             android:id="@+id/viewStubHorizontal"
