@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -178,9 +179,11 @@ public class CustomAlertDialogue extends DialogFragment {
         }
         if (builder.getMessage() != null) {
             message.setText(builder.getMessage());
+            message.setMovementMethod(new ScrollingMovementMethod());
         } else {
             message.setVisibility(View.GONE);
         }
+
 
         if (builder.isAutoHide()) {
             int time = builder.getTimeToHide() != 0 ? builder.getTimeToHide() : 10000;
@@ -206,8 +209,18 @@ public class CustomAlertDialogue extends DialogFragment {
             TextView negativeText = (TextView) negativeButton.findViewById(R.id.alerttext);
             negativeText.setClickable(true);
             negativeText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
-            negativeText.setText(builder.getNegativeText());
-            negativeText.setTypeface(builder.getNegativeTypeface());
+            if (builder.getNegativeTypeface() != null)
+            {
+                negativeText.setTypeface(builder.getNegativeTypeface());
+            }
+            if (builder.getNegativeColor() != 0)
+            {
+                negativeText.setTextColor(ContextCompat.getColor(view.getContext(), builder.getNegativeColor()));
+            }
+            else
+            {
+                negativeText.setTextColor(ContextCompat.getColor(view.getContext(), R.color.negative));
+            }
             negativeText.setTextColor(ContextCompat.getColor(view.getContext(), builder.getNegativeColor()));
             negativeText.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -231,8 +244,18 @@ public class CustomAlertDialogue extends DialogFragment {
             TextView positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
             positiveText.setClickable(true);
             positiveText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
-            positiveText.setText(builder.getPositiveText());
-            positiveText.setTypeface(builder.getPositiveTypeface());
+            if (builder.getPositiveTypeface() != null)
+            {
+                positiveText.setTypeface(builder.getPositiveTypeface());
+            }
+            if (builder.getPositiveColor() != 0)
+            {
+                positiveText.setTextColor(ContextCompat.getColor(view.getContext(), builder.getPositiveColor()));
+            }
+            else
+            {
+                positiveText.setTextColor(ContextCompat.getColor(view.getContext(), R.color.positive));
+            }
             positiveText.setTextColor(ContextCompat.getColor(view.getContext(), builder.getPositiveColor()));
             positiveText.setOnClickListener(new View.OnClickListener() {
                 @Override
