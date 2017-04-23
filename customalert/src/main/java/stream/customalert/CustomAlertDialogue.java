@@ -207,6 +207,7 @@ public class CustomAlertDialogue extends DialogFragment {
         if (builder.getNegativeText() != null) {
             View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
             TextView negativeText = (TextView) negativeButton.findViewById(R.id.alerttext);
+            negativeText.setText(builder.getNegativeText());
             negativeText.setClickable(true);
             negativeText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
             if (builder.getNegativeTypeface() != null)
@@ -221,7 +222,6 @@ public class CustomAlertDialogue extends DialogFragment {
             {
                 negativeText.setTextColor(ContextCompat.getColor(view.getContext(), R.color.negative));
             }
-            negativeText.setTextColor(ContextCompat.getColor(view.getContext(), builder.getNegativeColor()));
             negativeText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -242,6 +242,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
             View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
             TextView positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
+            positiveText.setText(builder.getPositiveText());
             positiveText.setClickable(true);
             positiveText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
             if (builder.getPositiveTypeface() != null)
@@ -256,7 +257,6 @@ public class CustomAlertDialogue extends DialogFragment {
             {
                 positiveText.setTextColor(ContextCompat.getColor(view.getContext(), R.color.positive));
             }
-            positiveText.setTextColor(ContextCompat.getColor(view.getContext(), builder.getPositiveColor()));
             positiveText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
