@@ -1,4 +1,4 @@
-package stream.customdialogue;
+package stream.customalert;
 
 import android.app.Activity;
 import android.app.Dialog;
