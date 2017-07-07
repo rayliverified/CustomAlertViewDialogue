@@ -132,13 +132,10 @@ public class CustomAlertDialogue extends DialogFragment {
         switch (style)
         {
             case DIALOGUE:
-                Log.d("Dialogue Layout", "Dialogue");
                 return inflater.inflate(R.layout.alert, container, false);
             case ACTIONSHEET:
-                Log.d("Dialogue Layout", "Dialogue");
                 return inflater.inflate(R.layout.alert_actionsheet, container,false);
             case SELECTOR:
-                Log.d("Dialogue Layout", "Selector");
                 return inflater.inflate(R.layout.alert, container, false);
         }
 

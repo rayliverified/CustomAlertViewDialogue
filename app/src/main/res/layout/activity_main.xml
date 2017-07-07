@@ -68,6 +68,11 @@
         <stream.custombutton.CustomButton
             style="@style/CustomButtonStyle"
             android:id="@+id/btn3"
-            android:text="Bottom Selector"/>
+            android:text="Selector"/>
+
+        <stream.custombutton.CustomButton
+            style="@style/CustomButtonStyle"
+            android:id="@+id/btn4"
+            android:text="Action Sheet"/>
     </LinearLayout>
 </FrameLayout>
