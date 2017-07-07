@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
     <View
         android:id="@+id/button_divider"
         android:layout_width="match_parent"
         android:background="@color/divider"
         android:layout_height="1dp"/>
+
     <TextView
         android:id="@+id/alerttext"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
         android:gravity="center"
         android:textColor="@color/positive"
-        android:textSize="@dimen/button_text_size"/>
+        android:textSize="@dimen/button_text_size"
+        android:background="@drawable/bg_alertview_button"/>
 </LinearLayout>

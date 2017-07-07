@@ -14,7 +14,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -205,8 +204,6 @@ public class CustomAlertDialogue extends DialogFragment {
             View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
             TextView negativeText = (TextView) negativeButton.findViewById(R.id.alerttext);
             negativeText.setText(builder.getNegativeText());
-            negativeText.setClickable(true);
-            negativeText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
             if (builder.getNegativeTypeface() != null)
             {
                 negativeText.setTypeface(builder.getNegativeTypeface());
@@ -240,8 +237,6 @@ public class CustomAlertDialogue extends DialogFragment {
             View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
             TextView positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
             positiveText.setText(builder.getPositiveText());
-            positiveText.setClickable(true);
-            positiveText.setBackgroundResource(R.drawable.bg_alertbutton_bottom);
             if (builder.getPositiveTypeface() != null)
             {
                 positiveText.setTypeface(builder.getPositiveTypeface());
@@ -688,7 +683,7 @@ public class CustomAlertDialogue extends DialogFragment {
             View view = convertView;
             if(view == null){
                 LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-                view =inflater.inflate(R.layout.alert_button, null);
+                view = inflater.inflate(R.layout.alert_button, null);
                 holder = createHolder(view);
                 view.setTag(holder);
             }

@@ -1,15 +1,12 @@
 package stream.customalertapp;
 
 import android.app.Dialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -57,6 +54,7 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
                 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
                         .setStyle(CustomAlertDialogue.Style.DIALOGUE)
+                        .setCancelable(false)
                         .setTitle("Delete Items")
                         .setMessage("Delete all completed items?")
                         .setPositiveText("Confirm")
@@ -137,6 +135,8 @@ public class MainActivity extends AppCompatActivity{
 
                 final CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
                         .setStyle(CustomAlertDialogue.Style.ACTIONSHEET)
+                        .setTitle("Action Sheet")
+                        .setTitleColor(R.color.text_default)
                         .setCancelText("More...")
                         .setOnCancelClicked(new CustomAlertDialogue.OnCancelClicked() {
                             @Override

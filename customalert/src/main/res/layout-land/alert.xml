@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:background="@android:color/transparent">
+              android:background="@color/transparent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/dialogue_margin_top"
         android:layout_marginBottom="@dimen/dialogue_margin_top"
         android:layout_gravity="center"
-        android:background="@drawable/bg_alertview_alert"
+        android:background="@drawable/bg_alertview"
         android:orientation="vertical">
 
         <TextView
