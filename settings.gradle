@@ -1,1 +1,1 @@
-include ':app', ':customalert', ':custombutton'
+include ':app', ':customalert'
