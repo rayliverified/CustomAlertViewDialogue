@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcel;
@@ -36,7 +35,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class CustomAlertDialogue extends DialogFragment {
     public static final String TAG = CustomAlertDialogue.class.getSimpleName();
@@ -59,7 +57,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
         if (savedInstanceState != null) {
             if (builder != null) {
-                builder = (Builder) savedInstanceState.getParcelable(Builder.class.getSimpleName());
+                builder = savedInstanceState.getParcelable(Builder.class.getSimpleName());
             }
         }
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
@@ -415,7 +413,7 @@ public class CustomAlertDialogue extends DialogFragment {
         }
 
         //Initialize input boxes.
-        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewStubVertical);
+        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewStubVerticalInput);
         viewStub.inflate();
 
         LinearLayout alertInput = (LinearLayout) view.findViewById(R.id.alertInput);
@@ -453,7 +451,7 @@ public class CustomAlertDialogue extends DialogFragment {
             {
                 View boxInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_box, null);
                 TextInputLayout inputLayout = (TextInputLayout) boxInput.findViewById(R.id.alert_input_layout);
-                inputLayout.setHint(builder.getLineInputHint().get(i));
+                inputLayout.setHint(builder.getBoxInputHint().get(i));
                 EditText editInput = (EditText) boxInput.findViewById(R.id.alert_input_text);
                 editInput.setTag("Box" + i);
                 tagList.add("Box" + i);
