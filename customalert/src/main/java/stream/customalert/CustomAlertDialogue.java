@@ -11,6 +11,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -423,8 +425,9 @@ public class CustomAlertDialogue extends DialogFragment {
             for (int i = 0; i < builder.getLineInputHint().size(); i++)
             {
                 View lineInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_line, null);
-                EditText editInput = (EditText) lineInput.findViewById(R.id.alert_input_text);
-                editInput.setHint(builder.getLineInputHint().get(i));
+                TextInputLayout inputLayout = (TextInputLayout) lineInput.findViewById(R.id.alert_input_layout);
+                inputLayout.setHint(builder.getLineInputHint().get(i));
+                TextInputEditText editInput = (TextInputEditText) lineInput.findViewById(R.id.alert_input_text);
                 editInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -449,8 +452,9 @@ public class CustomAlertDialogue extends DialogFragment {
             for (int i = 0; i < builder.getBoxInputHint().size(); i++)
             {
                 View boxInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_box, null);
+                TextInputLayout inputLayout = (TextInputLayout) boxInput.findViewById(R.id.alert_input_layout);
+                inputLayout.setHint(builder.getLineInputHint().get(i));
                 EditText editInput = (EditText) boxInput.findViewById(R.id.alert_input_text);
-                editInput.setHint(builder.getBoxInputHint().get(i));
                 editInput.setTag("Box" + i);
                 tagList.add("Box" + i);
                 alertInput.addView(boxInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
