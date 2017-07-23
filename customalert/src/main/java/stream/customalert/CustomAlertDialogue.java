@@ -14,15 +14,19 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,6 +39,8 @@ public class CustomAlertDialogue extends DialogFragment {
     private Builder builder;
     private Style style = Style.DIALOGUE;
     private Integer gravity = Gravity.CENTER;
+    private ArrayList<String> inputList;
+    private TextView positiveText;
     private static CustomAlertDialogue instance = new CustomAlertDialogue();
 
     public static CustomAlertDialogue getInstance() {
@@ -98,6 +104,10 @@ public class CustomAlertDialogue extends DialogFragment {
                 wlp.windowAnimations = R.style.CustomDialogAnimation;
                 wlp.gravity = Gravity.CENTER;
                 break;
+            case INPUT:
+                wlp.windowAnimations = R.style.CustomDialogAnimation;
+                wlp.gravity = Gravity.CENTER;
+                break;
         }
 
         if (builder.getGravity() != null)
@@ -136,6 +146,8 @@ public class CustomAlertDialogue extends DialogFragment {
                 return inflater.inflate(R.layout.alert_actionsheet, container,false);
             case SELECTOR:
                 return inflater.inflate(R.layout.alert, container, false);
+            case INPUT:
+                return inflater.inflate(R.layout.alert_input, container, false);
         }
 
         return null;
@@ -160,6 +172,10 @@ public class CustomAlertDialogue extends DialogFragment {
             if (style == Style.SELECTOR)
             {
                 initSelectorView(view);
+            }
+            if (style == Style.INPUT)
+            {
+                initInputView(view);
             }
         }
     }
@@ -317,6 +333,118 @@ public class CustomAlertDialogue extends DialogFragment {
         }
     }
 
+    private void initInputView(View view) {
+
+        //Initialize Dialogue View buttons. Identical code except for Positive button's OnInputClick listener
+        ViewStub viewStub1 = (ViewStub) view.findViewById(R.id.viewStubHorizontal);
+        viewStub1.inflate();
+
+        LinearLayout alertButtons = (LinearLayout) view.findViewById(R.id.alertButtons);
+
+        if (builder.getNegativeText() != null) {
+            View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
+            TextView negativeText = (TextView) negativeButton.findViewById(R.id.alerttext);
+            negativeText.setText(builder.getNegativeText());
+            if (builder.getNegativeTypeface() != null)
+            {
+                negativeText.setTypeface(builder.getNegativeTypeface());
+            }
+            if (builder.getNegativeColor() != 0)
+            {
+                negativeText.setTextColor(ContextCompat.getColor(view.getContext(), builder.getNegativeColor()));
+            }
+            else
+            {
+                negativeText.setTextColor(ContextCompat.getColor(view.getContext(), R.color.negative));
+            }
+            negativeText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    builder.getOnNegativeClicked().OnClick(v, getDialog());
+                }
+            });
+            alertButtons.addView(negativeButton, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        }
+
+        if (builder.getPositiveText() != null) {
+
+            //Add a divider between buttons if button exists.
+            View divider = new View(view.getContext());
+            divider.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.divider));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) view.getContext().getResources().getDimension(R.dimen.size_divider), LinearLayout.LayoutParams.MATCH_PARENT);
+            alertButtons.addView(divider, params);
+
+            View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
+            positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
+            positiveText.setText(builder.getPositiveText());
+            if (builder.getPositiveTypeface() != null)
+            {
+                positiveText.setTypeface(builder.getPositiveTypeface());
+            }
+            if (builder.getPositiveColor() != 0)
+            {
+                positiveText.setTextColor(ContextCompat.getColor(view.getContext(), builder.getPositiveColor()));
+            }
+            else
+            {
+                positiveText.setTextColor(ContextCompat.getColor(view.getContext(), R.color.positive));
+            }
+            positiveText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO return input values
+                    builder.getOnInputClicked().OnClick(v, getDialog(), inputList);
+                }
+            });
+            alertButtons.addView(positiveButton, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        }
+
+        //Initialize input boxes.
+        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewStubVertical);
+        viewStub.inflate();
+
+        LinearLayout alertInput = (LinearLayout) view.findViewById(R.id.alertInput);
+
+        if (builder.getLineInputHint() != null) {
+
+            for (int i = 0; i < builder.getLineInputHint().size(); i++)
+            {
+                View lineInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_line, null);
+                EditText editInput = (EditText) lineInput.findViewById(R.id.alert_input_text);
+                editInput.setHint(builder.getLineInputHint().get(i));
+                editInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                            if (builder.getPositiveText() != null)
+                            {
+                                Log.d("Input", "Submit");
+                                positiveText.performClick();
+                            }
+                        }
+                        return false;
+                    }
+                });
+                alertInput.addView(lineInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            }
+        }
+
+        if (builder.getBoxInputHint() != null) {
+
+            for (int i = 0; i < builder.getBoxInputHint().size(); i++)
+            {
+                View lineInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_box, null);
+                EditText editInput = (EditText) lineInput.findViewById(R.id.alert_input_text);
+                editInput.setHint(builder.getBoxInputHint().get(i));
+                alertInput.addView(lineInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            }
+        }
+
+    }
+
     private Dialog show(Activity activity, Builder builder) {
         this.builder = builder;
         if (!isAdded())
@@ -349,9 +477,12 @@ public class CustomAlertDialogue extends DialogFragment {
         private OnPositiveClicked onPositiveClicked;
         private OnNegativeClicked onNegativeClicked;
         private OnCancelClicked onCancelClicked;
+        private OnInputClicked onInputClicked;
 
         private ArrayList<String> destructive;
         private ArrayList<String> others;
+        private ArrayList<String> lineInputHint;
+        private ArrayList<String> boxInputHint;
         private AdapterView.OnItemClickListener onItemClickListener;
 
         private boolean autoHide;
@@ -376,6 +507,8 @@ public class CustomAlertDialogue extends DialogFragment {
             timeToHide = in.readInt();
             destructive = in.createStringArrayList();
             others = in.createStringArrayList();
+            lineInputHint = in.createStringArrayList();
+            boxInputHint = in.createStringArrayList();
             autoHide = in.readByte() != 0;
             cancelable = in.readByte() != 0;
         }
@@ -570,6 +703,14 @@ public class CustomAlertDialogue extends DialogFragment {
             return onCancelClicked;
         }
 
+        public Builder setOnInputClicked(OnInputClicked onInputClicked) {
+            this.onInputClicked = onInputClicked;
+            return this;
+        }
+        public OnInputClicked getOnInputClicked() {
+            return onInputClicked;
+        }
+
         public Builder setDestructive(ArrayList<String> destructive) {
             this.destructive = destructive;
             return this;
@@ -581,6 +722,22 @@ public class CustomAlertDialogue extends DialogFragment {
             return this;
         }
         public ArrayList<String> getOthers() { return others; }
+
+        public Builder setLineInputHint(ArrayList<String> lineInputHint) {
+            this.lineInputHint = lineInputHint;
+            return this;
+        }
+        public ArrayList<String> getLineInputHint() {
+            return lineInputHint;
+        }
+
+        public Builder setBoxInputHint(ArrayList<String> boxInputHint) {
+            this.boxInputHint = boxInputHint;
+            return this;
+        }
+        public ArrayList<String> getBoxInputHint() {
+            return boxInputHint;
+        }
 
         public Builder setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
             this.onItemClickListener = onItemClickListener;
@@ -644,10 +801,15 @@ public class CustomAlertDialogue extends DialogFragment {
         void OnClick(View view, Dialog dialog);
     }
 
+    public interface OnInputClicked {
+        void OnClick(View view, Dialog dialog, ArrayList<String> inputList);
+    }
+
     public enum Style{
         DIALOGUE,
         ACTIONSHEET,
-        SELECTOR
+        SELECTOR,
+        INPUT
     }
 
     public class CustomActionsheetAdapter extends BaseAdapter {

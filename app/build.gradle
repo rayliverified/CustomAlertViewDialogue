@@ -25,7 +25,8 @@ dependencies {
     }
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':customalert')
+    compile 'com.github.searchy2:CustomButton:1.2'
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.github.searchy2:CustomButton:1.2'
 }

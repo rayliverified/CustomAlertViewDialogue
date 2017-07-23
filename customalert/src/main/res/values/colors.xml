@@ -6,6 +6,7 @@
     <color name="others">#007aff</color>
     <color name="text_actionsheet_title">#000000</color>
     <color name="text_actionsheet_msg">#8f8f8f</color>
+    <color name="text_input">#5c5c5c</color>
     <color name="text_default">#000000</color>
     <color name="transparent">#00FFFFFF</color>
 </resources>

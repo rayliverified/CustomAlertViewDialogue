@@ -39,6 +39,8 @@
         android:paddingBottom="12dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_gravity="center"
@@ -55,24 +57,42 @@
             android:textSize="24sp"
             android:textColor="@color/white"/>
 
-        <stream.custombutton.CustomButton
-            style="@style/CustomButtonStyle"
-            android:id="@+id/btn1"
-            android:text="Simple Alert"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
 
-        <stream.custombutton.CustomButton
-            style="@style/CustomButtonStyle"
-            android:id="@+id/btn2"
-            android:text="Confirmation Alert"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <stream.custombutton.CustomButton
-            style="@style/CustomButtonStyle"
-            android:id="@+id/btn3"
-            android:text="Selector"/>
+                <stream.custombutton.CustomButton
+                    style="@style/CustomButtonStyle"
+                    android:id="@+id/btn1"
+                    android:text="Simple Alert"/>
 
-        <stream.custombutton.CustomButton
-            style="@style/CustomButtonStyle"
-            android:id="@+id/btn4"
-            android:text="Action Sheet"/>
+                <stream.custombutton.CustomButton
+                    style="@style/CustomButtonStyle"
+                    android:id="@+id/btn2"
+                    android:text="Confirmation Alert"/>
+
+                <stream.custombutton.CustomButton
+                    style="@style/CustomButtonStyle"
+                    android:id="@+id/btn3"
+                    android:text="Selector"/>
+
+                <stream.custombutton.CustomButton
+                    style="@style/CustomButtonStyle"
+                    android:id="@+id/btn4"
+                    android:text="Action Sheet"/>
+
+                <stream.custombutton.CustomButton
+                    style="@style/CustomButtonStyle"
+                    android:id="@+id/btn5"
+                    android:text="Input Box"/>
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </FrameLayout>

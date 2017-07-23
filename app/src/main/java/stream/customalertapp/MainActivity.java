@@ -179,6 +179,45 @@ public class MainActivity extends AppCompatActivity{
                 vibe.vibrate(30);
             }
         });
+
+        CustomButton btn5 = (CustomButton) findViewById(R.id.btn5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ArrayList<String> lineHint = new ArrayList<>();
+                lineHint.add("Email Address");
+
+                ArrayList<String> boxHint = new ArrayList<>();
+                boxHint.add("Message");
+
+                CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
+                        .setStyle(CustomAlertDialogue.Style.INPUT)
+                        .setTitle("Submit Feedback")
+                        .setMessage("What do you like about the app and what can we do better?")
+                        .setPositiveText("Submit")
+                        .setPositiveColor(R.color.positive)
+                        .setPositiveTypeface(Typeface.DEFAULT_BOLD)
+                        .setOnInputClicked(new CustomAlertDialogue.OnInputClicked() {
+                            @Override
+                            public void OnClick(View view, Dialog dialog, ArrayList<String> inputList) {
+                                dialog.dismiss();
+                                Toast.makeText(mContext, "Sent", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeText("Cancel")
+                        .setNegativeColor(R.color.negative)
+                        .setOnNegativeClicked(new CustomAlertDialogue.OnNegativeClicked() {
+                            @Override
+                            public void OnClick(View view, Dialog dialog) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setLineInputHint(lineHint)
+                        .build();
+                alert.show();
+            }
+        });
     }
 
     public void MoreSelector()

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/alert_input_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/text_input_margin_bottom"
+        android:layout_marginLeft="@dimen/text_margin_border"
+        android:layout_marginRight="@dimen/text_margin_border"
+        android:gravity="top"
+        android:hint="Input text here."
+        android:inputType="textFilter|textMultiLine"
+        android:textSize="@dimen/button_text_size"
+        android:textColorHint="@color/text_actionsheet_msg"
+        android:textColor="@color/text_input"
+        android:minLines="3"
+        android:maxLines="3"
+        android:scrollbars="vertical"
+        android:imeOptions="actionNext"
+        android:background="@color/transparent"
+        android:textCursorDrawable="@drawable/cursor"/>
+</LinearLayout>

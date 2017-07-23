@@ -15,4 +15,5 @@
     <dimen name="text_title_size">20sp</dimen>
     <dimen name="text_message_size">14sp</dimen>
     <dimen name="text_title_message_space">6dp</dimen>
+    <dimen name="text_input_margin_bottom">10dp</dimen>
 </resources>
