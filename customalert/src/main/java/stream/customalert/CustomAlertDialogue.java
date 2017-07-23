@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcel;
@@ -33,6 +34,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CustomAlertDialogue extends DialogFragment {
     public static final String TAG = CustomAlertDialogue.class.getSimpleName();
@@ -41,6 +43,7 @@ public class CustomAlertDialogue extends DialogFragment {
     private Integer gravity = Gravity.CENTER;
     private ArrayList<String> inputList;
     private TextView positiveText;
+    private ArrayList<String> tagList;
     private static CustomAlertDialogue instance = new CustomAlertDialogue();
 
     public static CustomAlertDialogue getInstance() {
@@ -333,7 +336,11 @@ public class CustomAlertDialogue extends DialogFragment {
         }
     }
 
-    private void initInputView(View view) {
+    private void initInputView(final View view) {
+
+        //Initialize and reset input/tag arrays.
+        inputList = new ArrayList<String>();
+        tagList = new ArrayList<String>();
 
         //Initialize Dialogue View buttons. Identical code except for Positive button's OnInputClick listener
         ViewStub viewStub1 = (ViewStub) view.findViewById(R.id.viewStubHorizontal);
@@ -394,6 +401,11 @@ public class CustomAlertDialogue extends DialogFragment {
                 @Override
                 public void onClick(View v) {
                     //TODO return input values
+                    for (String tag : tagList)
+                    {
+                        EditText editInput = (EditText) view.findViewWithTag(tag);
+                        inputList.add(editInput.getText().toString());
+                    }
                     builder.getOnInputClicked().OnClick(v, getDialog(), inputList);
                 }
             });
@@ -426,6 +438,8 @@ public class CustomAlertDialogue extends DialogFragment {
                         return false;
                     }
                 });
+                editInput.setTag("Line" + i);
+                tagList.add("Line" + i);
                 alertInput.addView(lineInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT, 1));
             }
@@ -438,11 +452,12 @@ public class CustomAlertDialogue extends DialogFragment {
                 View lineInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_box, null);
                 EditText editInput = (EditText) lineInput.findViewById(R.id.alert_input_text);
                 editInput.setHint(builder.getBoxInputHint().get(i));
+                editInput.setTag("Box" + i);
+                tagList.add("Box" + i);
                 alertInput.addView(lineInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT, 1));
             }
         }
-
     }
 
     private Dialog show(Activity activity, Builder builder) {

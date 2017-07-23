@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -186,7 +187,10 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
 
                 ArrayList<String> lineHint = new ArrayList<>();
+                lineHint.add("Username");
                 lineHint.add("Email Address");
+                lineHint.add("Name");
+                lineHint.add("Zip Code");
 
                 ArrayList<String> boxHint = new ArrayList<>();
                 boxHint.add("Message");
@@ -194,7 +198,7 @@ public class MainActivity extends AppCompatActivity{
                 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
                         .setStyle(CustomAlertDialogue.Style.INPUT)
                         .setTitle("Submit Feedback")
-                        .setMessage("What do you like about the app and what can we do better?")
+                        .setMessage("We love to hear feedback! Please share your thoughts and comments:")
                         .setPositiveText("Submit")
                         .setPositiveColor(R.color.positive)
                         .setPositiveTypeface(Typeface.DEFAULT_BOLD)
@@ -203,6 +207,10 @@ public class MainActivity extends AppCompatActivity{
                             public void OnClick(View view, Dialog dialog, ArrayList<String> inputList) {
                                 dialog.dismiss();
                                 Toast.makeText(mContext, "Sent", Toast.LENGTH_SHORT).show();
+                                for (String input : inputList)
+                                {
+                                    Log.d("Input", input);
+                                }
                             }
                         })
                         .setNegativeText("Cancel")
@@ -214,6 +222,7 @@ public class MainActivity extends AppCompatActivity{
                             }
                         })
                         .setLineInputHint(lineHint)
+                        .setBoxInputHint(boxHint)
                         .build();
                 alert.show();
             }

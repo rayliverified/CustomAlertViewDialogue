@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dialogue_margin_side"
         android:layout_marginRight="@dimen/dialogue_margin_side"
-        android:layout_marginTop="@dimen/dialogue_margin_top"
-        android:layout_marginBottom="@dimen/dialogue_margin_top"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
         android:layout_gravity="center"
         android:background="@drawable/bg_alertview"
         android:orientation="vertical">
