@@ -400,7 +400,6 @@ public class CustomAlertDialogue extends DialogFragment {
             positiveText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO return input values
                     for (String tag : tagList)
                     {
                         EditText editInput = (EditText) view.findViewWithTag(tag);
@@ -449,15 +448,23 @@ public class CustomAlertDialogue extends DialogFragment {
 
             for (int i = 0; i < builder.getBoxInputHint().size(); i++)
             {
-                View lineInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_box, null);
-                EditText editInput = (EditText) lineInput.findViewById(R.id.alert_input_text);
+                View boxInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_box, null);
+                EditText editInput = (EditText) boxInput.findViewById(R.id.alert_input_text);
                 editInput.setHint(builder.getBoxInputHint().get(i));
                 editInput.setTag("Box" + i);
                 tagList.add("Box" + i);
-                alertInput.addView(lineInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                alertInput.addView(boxInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT, 1));
             }
         }
+
+        //TODO Fix bug that causes last input value to be saved and placed into every other boxes's value
+        //Bug is not caused by added tags and cannot be fixed by setting text to null.
+        //Create a hidden layout to prevent the last input box from being saved.
+        View hiddenInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_line, null);
+        hiddenInput.setVisibility(View.GONE);
+        alertInput.addView(hiddenInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1));
     }
 
     private Dialog show(Activity activity, Builder builder) {
