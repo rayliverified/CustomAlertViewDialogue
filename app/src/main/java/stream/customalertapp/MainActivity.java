@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity{
                             }
                         })
                         .setLineInputHint(lineHint)
-//                        .setBoxInputHint(boxHint)
+                        .setBoxInputHint(boxHint)
                         .build();
                 alert.show();
             }
