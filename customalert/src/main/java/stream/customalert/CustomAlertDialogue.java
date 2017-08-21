@@ -62,13 +62,16 @@ public class CustomAlertDialogue extends DialogFragment {
         }
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
         setRetainInstance(true);
-        if (builder.getCancelable() == false)
+        if (builder != null)
         {
-            this.setCancelable(false);
-        }
-        else
-        {
-            this.setCancelable(true);
+            if (!builder.getCancelable())
+            {
+                this.setCancelable(false);
+            }
+            else
+            {
+                this.setCancelable(true);
+            }
         }
         super.onCreate(savedInstanceState);
     }
