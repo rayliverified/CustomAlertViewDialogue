@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity{
                         .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                CustomAlertDialogue.getInstance().dismiss();
                                 Toast.makeText(mContext, "Selected " + i, Toast.LENGTH_SHORT).show();
                             }
                         })

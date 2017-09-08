@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "stream.customalertsample"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary true
@@ -22,11 +22,12 @@ android {
 dependencies {
     repositories {
         maven { url 'https://jitpack.io' }
+        maven { url "https://maven.google.com" }
     }
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':customalert')
     compile 'com.github.searchy2:CustomButton:1.2'
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.0.2'
+    compile 'com.android.support:design:26.0.2'
 }
