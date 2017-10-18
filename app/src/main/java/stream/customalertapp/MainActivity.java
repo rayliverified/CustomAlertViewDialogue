@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         mContext = getApplicationContext();
 
-        CustomButton btn1 = (CustomButton) findViewById(R.id.btn1);
+        CustomButton btn1 = findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        CustomButton btn2 = (CustomButton) findViewById(R.id.btn2);
+        CustomButton btn2 = findViewById(R.id.btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        CustomButton btn3 = (CustomButton) findViewById(R.id.btn3);
+        CustomButton btn3 = findViewById(R.id.btn3);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity{
                 other.add("Choice 19");
                 other.add("Choice 20");
 
-                final CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
+                CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
                         .setStyle(CustomAlertDialogue.Style.SELECTOR)
                         .setDestructive(destructive)
                         .setOthers(other)
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        CustomButton btn4 = (CustomButton) findViewById(R.id.btn4);
+        CustomButton btn4 = findViewById(R.id.btn4);
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity{
                 other.add("Copy");
                 other.add("Forward");
 
-                final CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
+                CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
                         .setStyle(CustomAlertDialogue.Style.ACTIONSHEET)
                         .setTitle("Action Sheet")
                         .setTitleColor(R.color.text_default)
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        CustomButton btn5 = (CustomButton) findViewById(R.id.btn5);
+        CustomButton btn5 = findViewById(R.id.btn5);
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,8 +193,16 @@ public class MainActivity extends AppCompatActivity{
                 lineHint.add("Name");
                 lineHint.add("Zip Code");
 
+                ArrayList<String> lineText = new ArrayList<>();
+                lineText.add("sampleuser");
+                lineText.add(null);
+                lineText.add("Sample User");
+
                 ArrayList<String> boxHint = new ArrayList<>();
                 boxHint.add("Message");
+
+                ArrayList<String> boxText = new ArrayList<>();
+                boxText.add("BoxHint");
 
                 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
                         .setStyle(CustomAlertDialogue.Style.INPUT)
@@ -206,12 +214,12 @@ public class MainActivity extends AppCompatActivity{
                         .setOnInputClicked(new CustomAlertDialogue.OnInputClicked() {
                             @Override
                             public void OnClick(View view, Dialog dialog, ArrayList<String> inputList) {
-                                dialog.dismiss();
                                 Toast.makeText(mContext, "Sent", Toast.LENGTH_SHORT).show();
                                 for (String input : inputList)
                                 {
                                     Log.d("Input", input);
                                 }
+                                dialog.dismiss();
                             }
                         })
                         .setNegativeText("Cancel")
@@ -223,7 +231,9 @@ public class MainActivity extends AppCompatActivity{
                             }
                         })
                         .setLineInputHint(lineHint)
+                        .setLineInputText(lineText)
                         .setBoxInputHint(boxHint)
+                        .setBoxInputText(boxText)
                         .build();
                 alert.show();
             }

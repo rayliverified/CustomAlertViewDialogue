@@ -23,6 +23,7 @@
             android:textColor="@color/text_input"
             android:singleLine="true"
             android:maxLines="1"
+            android:saveEnabled="false"
             android:background="@color/transparent"
             android:textCursorDrawable="@drawable/cursor"/>
     </android.support.design.widget.TextInputLayout>

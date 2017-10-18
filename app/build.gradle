@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "stream.customalertsample"
         minSdkVersion 15
@@ -26,7 +26,7 @@ dependencies {
     }
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':customalert')
-    compile 'com.github.searchy2:CustomButton:1.2'
+    compile 'com.github.searchy2:CustomButton:1.3'
 
     compile 'com.android.support:appcompat-v7:26.0.2'
     compile 'com.android.support:design:26.0.2'

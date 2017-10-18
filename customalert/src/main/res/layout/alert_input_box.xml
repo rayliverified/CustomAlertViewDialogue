@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:hint="Input text here.">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/alert_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,6 +26,7 @@
             android:maxLines="3"
             android:inputType="textAutoComplete|textAutoCorrect|textMultiLine|textCapSentences"
             android:autoText="true"
+            android:saveEnabled="false"
             android:scrollbars="vertical"
             android:imeOptions="actionNext"
             android:background="@color/transparent"

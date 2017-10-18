@@ -188,8 +188,8 @@ public class CustomAlertDialogue extends DialogFragment {
 
     private void initCommonView(View view) {
         //Common elements
-        title = (TextView) view.findViewById(R.id.title);
-        message = (TextView) view.findViewById(R.id.message);
+        title = view.findViewById(R.id.title);
+        message = view.findViewById(R.id.message);
         if (builder.getTitle() != null) {
             title.setText(builder.getTitle());
         } else {
@@ -217,14 +217,14 @@ public class CustomAlertDialogue extends DialogFragment {
 
     private void initDialogueView(View view) {
 
-        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewStubHorizontal);
+        ViewStub viewStub = view.findViewById(R.id.viewStubHorizontal);
         viewStub.inflate();
 
-        LinearLayout alertButtons = (LinearLayout) view.findViewById(R.id.alertButtons);
+        LinearLayout alertButtons = view.findViewById(R.id.alertButtons);
 
         if (builder.getNegativeText() != null) {
             View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
-            TextView negativeText = (TextView) negativeButton.findViewById(R.id.alerttext);
+            TextView negativeText = negativeButton.findViewById(R.id.alerttext);
             negativeText.setText(builder.getNegativeText());
             if (builder.getNegativeTypeface() != null)
             {
@@ -257,7 +257,7 @@ public class CustomAlertDialogue extends DialogFragment {
             alertButtons.addView(divider, params);
 
             View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
-            TextView positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
+            TextView positiveText = positiveButton.findViewById(R.id.alerttext);
             positiveText.setText(builder.getPositiveText());
             if (builder.getPositiveTypeface() != null)
             {
@@ -284,7 +284,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
     private void initActionsheetView(View view) {
 
-        TextView cancelButton = (TextView) view.findViewById(R.id.cancel);
+        TextView cancelButton = view.findViewById(R.id.cancel);
         if(builder.getCancelText() != null){
             cancelButton.setVisibility(View.VISIBLE);
             cancelButton.setText(builder.getCancelText());
@@ -305,7 +305,7 @@ public class CustomAlertDialogue extends DialogFragment {
             if (builder.getDestructive() != null || builder.getOthers() != null)
             {
                 //Add a divider between header and listview
-                View header = (View) view.findViewById(R.id.header_divider);
+                View header = view.findViewById(R.id.header_divider);
                 header.setVisibility(View.VISIBLE);
             }
         }
@@ -315,7 +315,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
     private void initSelectorView(View view) {
 
-        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewStubVertical);
+        ViewStub viewStub = view.findViewById(R.id.viewStubVertical);
         viewStub.inflate();
         initListView(view);
     }
@@ -330,7 +330,7 @@ public class CustomAlertDialogue extends DialogFragment {
         {
             mData.addAll(builder.getOthers());
         }
-        ListView alertButtonListView = (ListView) view.findViewById(R.id.listview);
+        ListView alertButtonListView = view.findViewById(R.id.listview);
         CustomActionsheetAdapter adapter = new CustomActionsheetAdapter(mData, builder.getDestructive());
         alertButtonListView.setAdapter(adapter);
         if (builder.getOnItemClickListener() != null)
@@ -342,18 +342,18 @@ public class CustomAlertDialogue extends DialogFragment {
     private void initInputView(final View view) {
 
         //Initialize and reset input/tag arrays.
-        inputList = new ArrayList<String>();
-        tagList = new ArrayList<String>();
+        inputList = new ArrayList<>();
+        tagList = new ArrayList<>();
 
         //Initialize Dialogue View buttons. Identical code except for Positive button's OnInputClick listener
-        ViewStub viewStub1 = (ViewStub) view.findViewById(R.id.viewStubHorizontal);
+        ViewStub viewStub1 = view.findViewById(R.id.viewStubHorizontal);
         viewStub1.inflate();
 
-        LinearLayout alertButtons = (LinearLayout) view.findViewById(R.id.alertButtons);
+        LinearLayout alertButtons = view.findViewById(R.id.alertButtons);
 
         if (builder.getNegativeText() != null) {
             View negativeButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
-            TextView negativeText = (TextView) negativeButton.findViewById(R.id.alerttext);
+            TextView negativeText = negativeButton.findViewById(R.id.alerttext);
             negativeText.setText(builder.getNegativeText());
             if (builder.getNegativeTypeface() != null)
             {
@@ -386,7 +386,7 @@ public class CustomAlertDialogue extends DialogFragment {
             alertButtons.addView(divider, params);
 
             View positiveButton = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_button, null);
-            positiveText = (TextView) positiveButton.findViewById(R.id.alerttext);
+            positiveText = positiveButton.findViewById(R.id.alerttext);
             positiveText.setText(builder.getPositiveText());
             if (builder.getPositiveTypeface() != null)
             {
@@ -405,7 +405,7 @@ public class CustomAlertDialogue extends DialogFragment {
                 public void onClick(View v) {
                     for (String tag : tagList)
                     {
-                        EditText editInput = (EditText) view.findViewWithTag(tag);
+                        EditText editInput = view.findViewWithTag(tag);
                         inputList.add(editInput.getText().toString());
                     }
                     builder.getOnInputClicked().OnClick(v, getDialog(), inputList);
@@ -416,19 +416,19 @@ public class CustomAlertDialogue extends DialogFragment {
         }
 
         //Initialize input boxes.
-        ViewStub viewStub = (ViewStub) view.findViewById(R.id.viewStubVerticalInput);
+        ViewStub viewStub = view.findViewById(R.id.viewStubVerticalInput);
         viewStub.inflate();
 
-        LinearLayout alertInput = (LinearLayout) view.findViewById(R.id.alertInput);
+        LinearLayout alertInput = view.findViewById(R.id.alertInput);
 
         if (builder.getLineInputHint() != null) {
 
             for (int i = 0; i < builder.getLineInputHint().size(); i++)
             {
                 View lineInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_line, null);
-                TextInputLayout inputLayout = (TextInputLayout) lineInput.findViewById(R.id.alert_input_layout);
+                TextInputLayout inputLayout = lineInput.findViewById(R.id.alert_input_layout);
                 inputLayout.setHint(builder.getLineInputHint().get(i));
-                TextInputEditText editInput = (TextInputEditText) lineInput.findViewById(R.id.alert_input_text);
+                TextInputEditText editInput = lineInput.findViewById(R.id.alert_input_text);
                 editInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -441,6 +441,15 @@ public class CustomAlertDialogue extends DialogFragment {
                         return false;
                     }
                 });
+                Log.d("Input Text Size", String.valueOf(builder.getLineInputText().size()));
+                if (builder.getLineInputText().size() > i)
+                {
+                    if (builder.getLineInputText().get(i) != null)
+                    {
+                        editInput.setText(builder.getLineInputText().get(i));
+                        Log.d("Set Text", builder.getLineInputText().get(i));
+                    }
+                }
                 editInput.setTag("Line" + i);
                 tagList.add("Line" + i);
                 alertInput.addView(lineInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -453,23 +462,20 @@ public class CustomAlertDialogue extends DialogFragment {
             for (int i = 0; i < builder.getBoxInputHint().size(); i++)
             {
                 View boxInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_box, null);
-                TextInputLayout inputLayout = (TextInputLayout) boxInput.findViewById(R.id.alert_input_layout);
+                TextInputLayout inputLayout = boxInput.findViewById(R.id.alert_input_layout);
                 inputLayout.setHint(builder.getBoxInputHint().get(i));
-                EditText editInput = (EditText) boxInput.findViewById(R.id.alert_input_text);
+                EditText editInput = boxInput.findViewById(R.id.alert_input_text);
+                if (builder.getBoxInputText().size() > i)
+                {
+                    if (builder.getBoxInputText().get(i) != null)
+                        editInput.setText(builder.getBoxInputText().get(i));
+                }
                 editInput.setTag("Box" + i);
                 tagList.add("Box" + i);
                 alertInput.addView(boxInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT, 1));
             }
         }
-
-        //TODO Fix bug that causes last input value to be saved and placed into every other boxes's value
-        //Bug is not caused by added tags and cannot be fixed by setting text to null.
-        //Create a hidden layout to prevent the last input box from being saved.
-        View hiddenInput = LayoutInflater.from(view.getContext()).inflate(R.layout.alert_input_line, null);
-        hiddenInput.setVisibility(View.GONE);
-        alertInput.addView(hiddenInput, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT, 1));
     }
 
     private Dialog show(Activity activity, Builder builder) {
@@ -509,7 +515,9 @@ public class CustomAlertDialogue extends DialogFragment {
         private ArrayList<String> destructive;
         private ArrayList<String> others;
         private ArrayList<String> lineInputHint;
+        private ArrayList<String> lineInputText;
         private ArrayList<String> boxInputHint;
+        private ArrayList<String> boxInputText;
         private AdapterView.OnItemClickListener onItemClickListener;
 
         private boolean autoHide;
@@ -535,7 +543,9 @@ public class CustomAlertDialogue extends DialogFragment {
             destructive = in.createStringArrayList();
             others = in.createStringArrayList();
             lineInputHint = in.createStringArrayList();
+            lineInputText = in.createStringArrayList();
             boxInputHint = in.createStringArrayList();
+            boxInputText = in.createStringArrayList();
             autoHide = in.readByte() != 0;
             cancelable = in.readByte() != 0;
         }
@@ -758,6 +768,26 @@ public class CustomAlertDialogue extends DialogFragment {
             return lineInputHint;
         }
 
+        public Builder setLineInputText(ArrayList<String> lineInputText) {
+            this.lineInputText = lineInputText;
+            return this;
+        }
+        public ArrayList<String> getLineInputText() {
+            if (lineInputText == null)
+                return new ArrayList<>();
+            return lineInputText;
+        }
+
+        public Builder setBoxInputText(ArrayList<String> boxInputText) {
+            this.boxInputText = boxInputText;
+            return this;
+        }
+        public ArrayList<String> getBoxInputText() {
+            if (boxInputText == null)
+                return new ArrayList<>();
+            return boxInputHint;
+        }
+
         public Builder setBoxInputHint(ArrayList<String> boxInputHint) {
             this.boxInputHint = boxInputHint;
             return this;
@@ -892,8 +922,8 @@ public class CustomAlertDialogue extends DialogFragment {
             private TextView buttonText;
 
             public Holder(View view){
-                buttonText = (TextView) view.findViewById(R.id.alerttext);
-                buttonDivider = (View) view.findViewById(R.id.button_divider);
+                buttonText = view.findViewById(R.id.alerttext);
+                buttonDivider = view.findViewById(R.id.button_divider);
             }
             public void UpdateUI(Context context, String data, int position){
 
