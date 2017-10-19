@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity{
                 boxHint.add("Message");
 
                 ArrayList<String> boxText = new ArrayList<>();
-                boxText.add("BoxHint");
+                boxText.add("BoxText");
 
                 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
                         .setStyle(CustomAlertDialogue.Style.INPUT)

@@ -441,13 +441,11 @@ public class CustomAlertDialogue extends DialogFragment {
                         return false;
                     }
                 });
-                Log.d("Input Text Size", String.valueOf(builder.getLineInputText().size()));
                 if (builder.getLineInputText().size() > i)
                 {
                     if (builder.getLineInputText().get(i) != null)
                     {
                         editInput.setText(builder.getLineInputText().get(i));
-                        Log.d("Set Text", builder.getLineInputText().get(i));
                     }
                 }
                 editInput.setTag("Line" + i);
@@ -468,7 +466,9 @@ public class CustomAlertDialogue extends DialogFragment {
                 if (builder.getBoxInputText().size() > i)
                 {
                     if (builder.getBoxInputText().get(i) != null)
+                    {
                         editInput.setText(builder.getBoxInputText().get(i));
+                    }
                 }
                 editInput.setTag("Box" + i);
                 tagList.add("Box" + i);
@@ -785,7 +785,7 @@ public class CustomAlertDialogue extends DialogFragment {
         public ArrayList<String> getBoxInputText() {
             if (boxInputText == null)
                 return new ArrayList<>();
-            return boxInputHint;
+            return boxInputText;
         }
 
         public Builder setBoxInputHint(ArrayList<String> boxInputHint) {
