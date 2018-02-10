@@ -23,11 +23,11 @@
         <item name="android:ellipsize">none</item>
         <item name="btn_cornerRadius">20dp</item>
         <item name="btn_strokeWidth">1dp</item>
-        <item name="btn_strokeColor">@color/white</item>
-        <item name="btn_strokeSelectColor">@color/white_pressed</item>
+        <item name="btn_strokeColor">@color/colorPrimary</item>
+        <item name="btn_strokeSelectColor">@color/colorPrimaryLight</item>
         <item name="btn_buttonColor">@color/transparent</item>
         <item name="btn_buttonSelectColor">@color/transparent</item>
-        <item name="btn_textColor">@color/white</item>
-        <item name="btn_textSelectColor">@color/white_pressed</item>
+        <item name="btn_textColor">@color/colorPrimary</item>
+        <item name="btn_textSelectColor">@color/colorPrimaryLight</item>
     </style>
 </resources>

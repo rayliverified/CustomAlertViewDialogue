@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    buildToolsVersion "27.0.2"
     defaultConfig {
         applicationId "stream.customalertsample"
         minSdkVersion 15
@@ -24,10 +24,10 @@ dependencies {
         maven { url 'https://jitpack.io' }
         maven { url "https://maven.google.com" }
     }
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':customalert')
-    compile 'com.github.searchy2:CustomButton:1.5'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':customalert')
+    implementation 'com.github.searchy2:CustomButton:1.6'
 
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile 'com.android.support:design:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
 }
