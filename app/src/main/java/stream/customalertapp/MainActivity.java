@@ -3,12 +3,14 @@ package stream.customalertapp;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
@@ -23,10 +25,18 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
         setContentView(R.layout.activity_main);
         mContext = getApplicationContext();
 
+        //Simple Alert - a simple popup message.
         CustomButton btn1 = findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +59,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        //Confirmation Alert - a popup dialogue with two customizable choices.
         CustomButton btn2 = findViewById(R.id.btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +92,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        //Selector - a scrollable list of options.
         CustomButton btn3 = findViewById(R.id.btn3);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +139,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        //Action Sheet - a highly customizable bottom menu.
         CustomButton btn4 = findViewById(R.id.btn4);
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,6 +195,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        //Input Box - helps collect user input. Can be used as a contact/feedback form.
         CustomButton btn5 = findViewById(R.id.btn5);
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,5 +286,37 @@ public class MainActivity extends AppCompatActivity{
                 })
                 .build();
         alert.show();
+    }
+
+
+    @Override
+    protected void onPause() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            //Removes flickering from setting window fullscreen
+            Handler handler = new Handler();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                }
+            });
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            if (hasFocus) {
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+            }
+        }
+        super.onWindowFocusChanged(hasFocus);
     }
 }
