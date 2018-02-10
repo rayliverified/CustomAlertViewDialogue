@@ -562,14 +562,10 @@ public class CustomAlertDialogue extends DialogFragment {
             }
         };
 
-        public Builder setContext(Context context) {
-            this.context = context;
-            return this;
-        }
-        public Context getContext() {
-            return context;
-        }
-
+        /**
+         * @param style - set DIALOGUE, ACTIONSHEET, SELECTOR, INPUT to select AlertView type.
+         * @return
+         */
         public Builder setStyle(Style style) {
             if(style != null) {
                 this.style = style;
@@ -584,12 +580,20 @@ public class CustomAlertDialogue extends DialogFragment {
         }
         public Integer getGravity() { return gravity; }
 
+        /**
+         * @param title - set AlertView title text.
+         * @return
+         */
         public Builder setTitle(String title) {
             this.title = title;
             return this;
         }
         public String getTitle() { return title; }
 
+        /**
+         * @param message - set AlertView message text.
+         * @return
+         */
         public Builder setMessage(String message) {
             this.message = message;
             return this;
@@ -598,6 +602,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return message;
         }
 
+        /**
+         * @param positiveButtonText - set Confirmation Alert right button text.
+         * @return
+         */
         public Builder setPositiveText(String positiveButtonText) {
             this.positiveText = positiveButtonText;
             return this;
@@ -606,6 +614,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return positiveText;
         }
 
+        /**
+         * @param negativeText - set Simple Alert button text. Set Confirmation Alert left button text.
+         * @return
+         */
         public Builder setNegativeText(String negativeText) {
             this.negativeText = negativeText;
             return this;
@@ -614,12 +626,20 @@ public class CustomAlertDialogue extends DialogFragment {
             return negativeText;
         }
 
+        /**
+         * @param cancel - set Action Sheet cancel button text.
+         * @return
+         */
         public Builder setCancelText(String cancel) {
             this.cancelText = cancel;
             return this;
         }
         public String getCancelText() { return cancelText; }
 
+        /**
+         * @param titleColor - set title text color.
+         * @return
+         */
         public Builder setTitleColor(int titleColor) {
             this.titleColor = titleColor;
             return this;
@@ -628,6 +648,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return titleColor;
         }
 
+        /**
+         * @param messageColor - set message text color.
+         * @return
+         */
         public Builder setMessageColor(int messageColor) {
             this.messageColor = messageColor;
             return this;
@@ -636,6 +660,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return messageColor;
         }
 
+        /**
+         * @param positiveTextColor - set positive button text color.
+         * @return
+         */
         public Builder setPositiveColor(int positiveTextColor) {
             this.positiveColor = positiveTextColor;
             return this;
@@ -644,6 +672,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return positiveColor;
         }
 
+        /**
+         * @param negativeColor - set negative button text color.
+         * @return
+         */
         public Builder setNegativeColor(int negativeColor) {
             this.negativeColor = negativeColor;
             return this;
@@ -652,6 +684,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return negativeColor;
         }
 
+        /**
+         * @param cancelColor - set cancel button text color.
+         * @return
+         */
         public Builder setCancelColor(int cancelColor) {
             this.cancelColor = cancelColor;
             return this;
@@ -668,14 +704,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return backgroundColor;
         }
 
-        public Builder setTimeToHide(int timeToHide) {
-            this.timeToHide = timeToHide;
-            return this;
-        }
-        public int getTimeToHide() {
-            return timeToHide;
-        }
-
+        /**
+         * @param titleFontPath - set title text font. Must pass the path to the font in the assets folder.
+         * @return
+         */
         public Builder setTitleFont(String titleFontPath) {
             this.titleFont = Typeface.createFromAsset(context.getAssets(), titleFontPath);
             return this;
@@ -684,6 +716,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return titleFont;
         }
 
+        /**
+         * @param bodyFontPath - set message text font. Must pass the path to the font in the assets folder.
+         * @return
+         */
         public Builder setMessageFont(String bodyFontPath) {
             this.messageFont = Typeface.createFromAsset(context.getAssets(), bodyFontPath);
             return this;
@@ -692,6 +728,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return messageFont;
         }
 
+        /**
+         * @param positiveTypeface - set positive button text typeface.
+         * @return
+         */
         public Builder setPositiveTypeface(Typeface positiveTypeface) {
             this.positiveTypeface = positiveTypeface;
             return this;
@@ -700,6 +740,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return positiveTypeface;
         }
 
+        /**
+         * @param negativeTypeface - set negative button text typeface.
+         * @return
+         */
         public Builder setNegativeTypeface(Typeface negativeTypeface) {
             this.negativeTypeface = negativeTypeface;
             return this;
@@ -716,6 +760,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return alertTypeface;
         }
 
+        /**
+         * @param onPositiveClicked - pass a listener to be called when the positive button is clicked.
+         * @return
+         */
         public Builder setOnPositiveClicked(OnPositiveClicked onPositiveClicked) {
             this.onPositiveClicked = onPositiveClicked;
             return this;
@@ -724,6 +772,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return onPositiveClicked;
         }
 
+        /**
+         * @param onNegativeClicked - pass a listener to be called when the negative button is clicked.
+         * @return
+         */
         public Builder setOnNegativeClicked(OnNegativeClicked onNegativeClicked) {
             this.onNegativeClicked = onNegativeClicked;
             return this;
@@ -732,6 +784,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return onNegativeClicked;
         }
 
+        /**
+         * @param onCancelClicked - pass a listener to be called when the cancel button is clicked.
+         * @return
+         */
         public Builder setOnCancelClicked(OnCancelClicked onCancelClicked) {
             this.onCancelClicked = onCancelClicked;
             return this;
@@ -740,6 +796,20 @@ public class CustomAlertDialogue extends DialogFragment {
             return onCancelClicked;
         }
 
+        /**
+         * @param onItemClickListener - pass a listener to be called when a selection item is clicked.
+         * @return
+         */
+        public Builder setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
+            this.onItemClickListener = onItemClickListener;
+            return this;
+        }
+        public AdapterView.OnItemClickListener getOnItemClickListener() { return onItemClickListener; }
+
+        /**
+         * @param onInputClicked - pass a listener to be called when an input box is submitted.
+         * @return
+         */
         public Builder setOnInputClicked(OnInputClicked onInputClicked) {
             this.onInputClicked = onInputClicked;
             return this;
@@ -748,26 +818,30 @@ public class CustomAlertDialogue extends DialogFragment {
             return onInputClicked;
         }
 
+        /**
+         * @param destructive - converts a String ArrayList into destructive options in the selector.
+         * @return
+         */
         public Builder setDestructive(ArrayList<String> destructive) {
             this.destructive = destructive;
             return this;
         }
         public ArrayList<String> getDestructive() { return destructive; }
 
+        /**
+         * @param others - converts a String ArrayList into neutral options in the selector.
+         * @return
+         */
         public Builder setOthers(ArrayList<String> others) {
             this.others = others;
             return this;
         }
         public ArrayList<String> getOthers() { return others; }
 
-        public Builder setLineInputHint(ArrayList<String> lineInputHint) {
-            this.lineInputHint = lineInputHint;
-            return this;
-        }
-        public ArrayList<String> getLineInputHint() {
-            return lineInputHint;
-        }
-
+        /**
+         * @param lineInputText - converts a String ArrayList into single line text input boxes.
+         * @return
+         */
         public Builder setLineInputText(ArrayList<String> lineInputText) {
             this.lineInputText = lineInputText;
             return this;
@@ -778,6 +852,23 @@ public class CustomAlertDialogue extends DialogFragment {
             return lineInputText;
         }
 
+        /**
+         * @param lineInputHint - converts a String ArrayList into single line input boxes hints.
+         *                     Array length must match LineInputText length.
+         * @return
+         */
+        public Builder setLineInputHint(ArrayList<String> lineInputHint) {
+            this.lineInputHint = lineInputHint;
+            return this;
+        }
+        public ArrayList<String> getLineInputHint() {
+            return lineInputHint;
+        }
+
+        /**
+         * @param boxInputText - converts a String ArrayList into multiline text input boxes.
+         * @return
+         */
         public Builder setBoxInputText(ArrayList<String> boxInputText) {
             this.boxInputText = boxInputText;
             return this;
@@ -788,6 +879,11 @@ public class CustomAlertDialogue extends DialogFragment {
             return boxInputText;
         }
 
+        /**
+         * @param boxInputHint - converts a String ArrayList into multiline input boxes hints.
+         *                     Array length must match BoxInputText length.
+         * @return
+         */
         public Builder setBoxInputHint(ArrayList<String> boxInputHint) {
             this.boxInputHint = boxInputHint;
             return this;
@@ -796,12 +892,10 @@ public class CustomAlertDialogue extends DialogFragment {
             return boxInputHint;
         }
 
-        public Builder setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
-            this.onItemClickListener = onItemClickListener;
-            return this;
-        }
-        public AdapterView.OnItemClickListener getOnItemClickListener() { return onItemClickListener; }
-
+        /**
+         * @param autoHide - set `true` to automatically hide alert after a set time.
+         * @return
+         */
         public Builder setAutoHide(boolean autoHide) {
             this.autoHide = autoHide;
             return this;
@@ -810,23 +904,56 @@ public class CustomAlertDialogue extends DialogFragment {
             return autoHide;
         }
 
+        /**
+         * @param timeToHide - set time in milliseconds for popup to automatically dismiss.
+         *                   No listeners are triggered when dismissed automatically.
+         * @return
+         */
+        public Builder setTimeToHide(int timeToHide) {
+            this.timeToHide = timeToHide;
+            return this;
+        }
+        public int getTimeToHide() {
+            return timeToHide;
+        }
+
+        /**
+         * @param cancelable - set false to prevent dialogue dismissal through tapping outside or pressing the back button.
+         *                   Force the user to an choose option.
+         * @return
+         */
         public Builder setCancelable(boolean cancelable) {
             this.cancelable = cancelable;
             return this;
         }
         public boolean getCancelable() { return cancelable; }
 
-        public Builder setActivity(Context context) {
-            this.context = context;
-            return this;
-        }
-
+        /**
+         * The Dialog Fragment is extremely picky about the `Activity` passed into the builder.
+         * If the improper Activity is passed, the dialogue will crash!
+         * Here's how to pass the proper Activity in the following cases:
+         * Activity - construct with `ClassName.this`
+         * Fragment - construct with `getActivity()`
+         * ViewHolder - construct with `getActivity().getApplicationContext()`
+         * Do not attempt to construct the dialogue with `getContext()`.
+         * The Builder requires an Activity and passing a Context does not work!
+         * @param context - pass the Dialogue's parent activity.
+         * @return
+         */
         public Builder(Context context) { this.context = context; }
 
+        /**
+         * Construct the Dialogue Builder.
+         * @return
+         */
         public Builder build() {
             return this;
         }
 
+        /**
+         * Display the Dialogue with Builder parameters.
+         * @return
+         */
         public Dialog show() {
             return CustomAlertDialogue.getInstance().show(((Activity) context), this);
         }
