@@ -5,6 +5,8 @@
 
 Custom AlertView Dialogue is the world's most advanced alert view library. Custom AlertView Dialogue includes simple message popups, confirmation alerts, selector popups, action sheet bottom menus, and input/feedback contact forms. This library fixes many issues and crashes that plague other alert dialogue libraries and looks amazing while doing so! 
 
+![Screenshots](screenshots/Custom-Alert-Dialogue-Screenshot.gif)
+
 Custom AlertView Dialogue is part of the Custom UI collection of beautiful, minimalistic, and customizable Android UI components.
 
 # Gradle Dependency
@@ -23,7 +25,7 @@ implementation 'com.github.searchy2:CustomAlertViewDialogue:latest-version'
 
 Custom AlertView Dialogue uses the Builder format to initialize an alert view programmatically. To display an simple alert message, just drag and drop the following code into your project. It's that easy!
 
-![Screenshots](screenshots/Custom-Permissions-Dialogue-Simple_540x.jpg)
+![Screenshots](screenshots/Simple-Alert_480x.png)
 
 ```java
 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
