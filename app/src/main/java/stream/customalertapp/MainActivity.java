@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +22,9 @@ import stream.customalert.CustomAlertDialogue;
 import stream.custombutton.CustomButton;
 
 public class MainActivity extends AppCompatActivity{
+
+    ImageView mBackground;
+    CardView mCardView;
 
     private Context mContext;
 
@@ -35,6 +40,9 @@ public class MainActivity extends AppCompatActivity{
         }
         setContentView(R.layout.activity_main);
         mContext = getApplicationContext();
+
+        mBackground = findViewById(R.id.background);
+        mCardView = findViewById(R.id.cardview);
 
         //Simple Alert - a simple popup message.
         CustomButton btn1 = findViewById(R.id.btn1);
@@ -288,6 +296,27 @@ public class MainActivity extends AppCompatActivity{
         alert.show();
     }
 
+    //Hide background for screenshots.
+    public void HideBackground(boolean hide)
+    {
+        if (hide)
+        {
+            mBackground.setVisibility(View.GONE);
+            mCardView.setVisibility(View.GONE);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    HideBackground(false);
+                }
+            }, 5000);
+        }
+        else
+        {
+            mBackground.setVisibility(View.VISIBLE);
+            mCardView.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected void onPause() {

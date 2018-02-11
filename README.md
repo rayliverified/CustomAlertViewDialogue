@@ -55,7 +55,7 @@ Custom AlertView Dialogue provides many customization methods to display the ale
 
 **Simple Alert - a simple popup message.**
 
-![Screenshots](screenshots/Custom-Permissions-Dialogue-All_540x.jpg)
+![Screenshots](screenshots/Simple-Alert_480x.png)
 
 ```java
 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
@@ -78,7 +78,7 @@ alert.show();
 
 **Confirmation Alert - a popup dialogue with two customizable choices.**
 
-![Screenshots](screenshots/Custom-Permissions-Dialogue-Required_540x.jpg)
+![Screenshots](screenshots/Confirmation-Alert_540x.png)
 
 ```java
 CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
@@ -110,7 +110,7 @@ alert.show();
 
 **Selector - a scrollable list of options.**
 
-![Screenshots](screenshots/Custom-Permissions-Dialogue-Optional_540x.jpg)
+![Screenshots](screenshots/Selector_500x.png)
 
 ```java
 ArrayList<String> destructive = new ArrayList<>();
@@ -154,7 +154,7 @@ alert.show();
 
 **Action Sheet - a highly customizable bottom menu.**
 
-![Screenshots](screenshots/Custom-Permissions-Dialogue-Single_540x.jpg)
+![Screenshots](screenshots/Action-Sheet_540x.png)
 
 ```java
 ArrayList<String> other = new ArrayList<String>();
@@ -207,7 +207,7 @@ alert.show();
 
 **Input Box - helps collect user input. Can be used as a contact/feedback form.**
 
-![Screenshots](screenshots/Custom-Permissions-Dialogue-Combined_540x.jpg)
+![Screenshots](screenshots/Input-Box_540x.png)
 
 ```java
 ArrayList<String> lineHint = new ArrayList<>();
