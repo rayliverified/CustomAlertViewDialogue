@@ -7,7 +7,7 @@ Custom AlertView Dialogue is the world's most advanced alert view library. Custo
 
 ![Screenshots](screenshots/Custom-Alert-Dialogue-Screenshot.gif)
 
-Custom AlertView Dialogue is part of the Custom UI collection of beautiful, minimalistic, and customizable Android UI components.
+Custom AlertView Dialogue is part of the [Custom UI](http://rayliverified.com/index.php/code/) collection of beautiful, minimalistic, and customizable Android UI components.
 
 # Gradle Dependency
 
@@ -411,6 +411,25 @@ Dialog Fragment code - https://github.com/geniusforapp/fancyDialog
   <img alt="Ray Li GitHub"
        src="https://lh3.googleusercontent.com/L15QqmKK7Vl-Ag1ZxaBqNQlXVEw58JT2BDb-ef5t2eboDh0pPSLjDgi3-aQ3Opdhhyk=w96-rw" />
 </a>
+
+# Apps Using This Library
+
+Want to be here? You can include yourself by making a `pull request`. 
+
+<table>
+    <tr>
+		<td><img src="https://lh3.googleusercontent.com/tYGJBG8mc7lwC0ZxQUxif2FVMFI8L8xRkPON0ytkWVPTI67ggkrgDl3JpRu9jW0W3sLJ=w64-rw"/></td>
+		<td><a href="https://github.com/searchy2/Rocket-Notes">Rocket Notes</a></td>
+	</tr>
+	<tr>
+		<td><img src="https://lh3.googleusercontent.com/R-vJInTblK1KBOqZaSDm_ac270QBHsiIcU9agHnN-rrp9K_lkN8rLzGIH8asCfkb420Q=w64-rw"/></td>
+		<td><a href="https://play.google.com/store/apps/details?id=io.ideastarter">Crowdfunding Community</a></td>
+	</tr>
+    <tr>
+		<td><img src="https://lh3.googleusercontent.com/CT1M2pKlUhGx4w5UHqarn6oSU_sa7L7XRW2-hQrfNi9oou6W81PbJnWi-9PbEfC_3g=w64-rw"/></td>
+		<td><a href="https://play.google.com/store/apps/details?id=com.blankicon">Blank Icon</a></td>
+	</tr>
+</table>
 
 #### Search Terms
 android, alert, alertview, popup, dialog, dialogs, select, selector, confirmation, bottom menu, action sheet, chooser, choice, options, display, input, box, message, contact, feedback, form, modal 
