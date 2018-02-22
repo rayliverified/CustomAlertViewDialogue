@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+
+              android:background="@color/transparent"
+              android:orientation="vertical">
+
+    <stream.customalert.ui.CustomBlurDialogue
+        android:id="@+id/blurview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialogue_margin_side"
+        android:layout_marginRight="@dimen/dialogue_margin_side"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
+        app:blurOverlayColor="@color/colorOverlay">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_height"
+                android:layout_gravity="top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_margin_border"
+                    android:layout_marginBottom="@dimen/text_message_margin_bottom"
+                    android:layout_marginLeft="@dimen/text_margin_border"
+                    android:layout_marginRight="@dimen/text_margin_border"
+                    android:gravity="left"
+                    android:text="Dialogue Title"
+                    android:textSize="@dimen/text_title_size"
+                    android:textColor="@color/text_default"/>
+
+                <TextView
+                    android:id="@+id/message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_input_margin_bottom"
+                    android:layout_marginLeft="@dimen/text_margin_border"
+                    android:layout_marginRight="@dimen/text_margin_border"
+                    android:gravity="left"
+                    android:text="Sample Dialogue Message"
+                    android:textSize="@dimen/text_message_size"
+                    android:textColor="@color/text_default"
+                    android:maxLines="4"
+                    android:minLines="1"
+                    android:scrollbars="vertical"/>
+
+                <ViewStub
+                    android:id="@+id/viewStubVerticalInput"
+                    android:layout="@layout/alertview_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <ViewStub
+                android:id="@+id/viewStubHorizontal"
+                android:layout="@layout/alertview_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"/>
+        </FrameLayout>
+    </stream.customalert.ui.CustomBlurDialogue>
+</LinearLayout>

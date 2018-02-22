@@ -1,66 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/transparent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/header"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/bg_alertview"
-        android:orientation="vertical"
-        android:layout_weight="1.0">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button_view">
 
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/text_margin_border"
-            android:layout_marginRight="@dimen/text_margin_border"
-            android:layout_marginTop="@dimen/text_message_margin_top"
-            android:gravity="center"
-            android:text="Custom Actionsheet"
-            android:textSize="@dimen/text_message_size"
-            android:textColor="@color/text_actionsheet_title"/>
+            android:layout_marginLeft="@dimen/dialogue_margin_side"
+            android:layout_marginRight="@dimen/dialogue_margin_side"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_alertview"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/text_margin_border"
-            android:layout_marginRight="@dimen/text_margin_border"
-            android:layout_marginTop="@dimen/text_message_margin_bottom"
-            android:gravity="center"
-            android:text="Sample Actionsheet Message"
-            android:textSize="@dimen/text_message_size"
-            android:textColor="@color/text_actionsheet_msg"/>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_margin_border"
+                android:layout_marginRight="@dimen/text_margin_border"
+                android:layout_marginTop="@dimen/text_message_margin_top"
+                android:gravity="center"
+                android:text="Custom Actionsheet"
+                android:textSize="@dimen/text_message_size"
+                android:textColor="@color/text_actionsheet_title"/>
 
-        <View
-            android:id="@+id/header_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/divider"
-            android:visibility="gone"/>
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_margin_border"
+                android:layout_marginRight="@dimen/text_margin_border"
+                android:layout_marginTop="@dimen/text_message_margin_bottom"
+                android:gravity="center"
+                android:text="Sample Actionsheet Message"
+                android:textSize="@dimen/text_message_size"
+                android:textColor="@color/text_actionsheet_msg"/>
 
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:listSelector="@color/transparent"
-            android:cacheColorHint="@color/transparent"
-            android:divider="@null"
-            android:scrollbars="none"
-            android:layout_weight="1.0"/>
-    </LinearLayout>
+            <View
+                android:id="@+id/header_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/divider"
+                android:visibility="gone"/>
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:listSelector="@color/transparent"
+                android:cacheColorHint="@color/transparent"
+                android:divider="@null"
+                android:scrollbars="none"
+                android:layout_weight="1.0"/>
+        </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/button_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/button_margin"
         android:layout_marginBottom="@dimen/button_margin"
+        android:layout_marginLeft="@dimen/dialogue_margin_side"
+        android:layout_marginRight="@dimen/dialogue_margin_side"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/bg_alertview"
         android:orientation="vertical">
 
@@ -77,4 +87,4 @@
             android:clickable="true"
             android:visibility="gone"/>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

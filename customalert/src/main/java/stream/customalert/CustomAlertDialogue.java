@@ -1,9 +1,11 @@
 package stream.customalert;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcel;
@@ -16,6 +18,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -35,6 +38,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import stream.customalert.ui.CustomBlurDialogue;
 
 public class CustomAlertDialogue extends DialogFragment {
     public static final String TAG = CustomAlertDialogue.class.getSimpleName();
@@ -82,7 +87,6 @@ public class CustomAlertDialogue extends DialogFragment {
         if (builder != null)
             outState.putParcelable(Builder.class.getSimpleName(), builder);
     }
-
 
     @NonNull
     @Override
@@ -202,7 +206,6 @@ public class CustomAlertDialogue extends DialogFragment {
             message.setVisibility(View.GONE);
         }
 
-
         if (builder.isAutoHide()) {
             int time = builder.getTimeToHide() != 0 ? builder.getTimeToHide() : 10000;
             new Handler().postDelayed(new Runnable() {
@@ -280,9 +283,18 @@ public class CustomAlertDialogue extends DialogFragment {
             alertButtons.addView(positiveButton, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         }
+
+        float radius = 5;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview);
+            blurDialogue.create(builder.getDecorView(), radius);
+        }
     }
 
     private void initActionsheetView(View view) {
+
+        float radius = 5;
 
         TextView cancelButton = view.findViewById(R.id.cancel);
         if(builder.getCancelText() != null){
@@ -298,6 +310,12 @@ public class CustomAlertDialogue extends DialogFragment {
             {
                 cancelButton.setTextColor(builder.getCancelColor());
             }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            {
+                CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview_button);
+                blurDialogue.create(builder.getDecorView(), radius);
+            }
         }
 
         if (builder.getTitle() != null || builder.getMessage() != null)
@@ -311,6 +329,12 @@ public class CustomAlertDialogue extends DialogFragment {
         }
 
         initListView(view);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview);
+            blurDialogue.create(builder.getDecorView(), radius);
+        }
     }
 
     private void initSelectorView(View view) {
@@ -318,6 +342,13 @@ public class CustomAlertDialogue extends DialogFragment {
         ViewStub viewStub = view.findViewById(R.id.viewStubVertical);
         viewStub.inflate();
         initListView(view);
+
+        float radius = 5;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview);
+            blurDialogue.create(builder.getDecorView(), radius);
+        }
     }
 
     private void initListView(View view) {
@@ -476,6 +507,13 @@ public class CustomAlertDialogue extends DialogFragment {
                         LinearLayout.LayoutParams.WRAP_CONTENT, 1));
             }
         }
+
+        float radius = 5;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview);
+            blurDialogue.create(builder.getDecorView(), radius);
+        }
     }
 
     private Dialog show(Activity activity, Builder builder) {
@@ -525,6 +563,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
         private Integer gravity;
         private Style style;
+        private View decorView;
         private Context context;
 
         protected Builder(Parcel in) {
@@ -928,6 +967,18 @@ public class CustomAlertDialogue extends DialogFragment {
         }
         public boolean getCancelable() { return cancelable; }
 
+        public View getDecorView() {
+
+            return decorView;
+        }
+
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+        public Builder setDecorView(View decorView) {
+
+            this.decorView = decorView;
+            return this;
+        }
+
         /**
          * The Dialog Fragment is extremely picky about the `Activity` passed into the builder.
          * If the improper Activity is passed, the dialogue will crash!
@@ -1071,6 +1122,17 @@ public class CustomAlertDialogue extends DialogFragment {
                     buttonText.setTextColor(ContextCompat.getColor(context, R.color.positive));
                 }
             }
+        }
+    }
+
+    public static class Units {
+        /**
+         * Converts dp to pixels.
+         */
+        public static int dpToPx(Context context, int dp) {
+            DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+            int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+            return px;
         }
     }
 }

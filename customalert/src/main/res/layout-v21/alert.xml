@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <stream.customalert.ui.CustomBlurDialogue
+        android:id="@+id/blurview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dialogue_margin_side"
+        android:layout_gravity="center"
+        app:blurOverlayColor="@color/colorOverlay">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_border"
+                android:layout_marginBottom="@dimen/text_title_message_space"
+                android:layout_marginLeft="@dimen/text_margin_border"
+                android:layout_marginRight="@dimen/text_margin_border"
+                android:gravity="center"
+                android:text="Dialogue Title"
+                android:textSize="@dimen/text_title_size"
+                android:textColor="@color/text_default"/>
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_margin_bottom"
+                android:layout_marginLeft="@dimen/text_margin_border"
+                android:layout_marginRight="@dimen/text_margin_border"
+                android:gravity="center"
+                android:text="Sample Dialogue Message"
+                android:textSize="@dimen/text_message_size"
+                android:textColor="@color/text_default"
+                android:maxLines="4"
+                android:minLines="1"
+                android:scrollbars="vertical"/>
+
+            <ViewStub
+                android:id="@+id/viewStubHorizontal"
+                android:layout="@layout/alertview_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ViewStub
+                android:id="@+id/viewStubVertical"
+                android:layout="@layout/alertview_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </stream.customalert.ui.CustomBlurDialogue>
+</LinearLayout>

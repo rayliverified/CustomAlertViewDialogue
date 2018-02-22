@@ -1,5 +1,6 @@
 package stream.customalertapp;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity{
                                 dialog.dismiss();
                             }
                         })
+                        .setDecorView(getWindow().getDecorView())
                         .build();
                 alert.show();
             }
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity{
                                 dialog.dismiss();
                             }
                         })
+                        .setDecorView(getWindow().getDecorView())
                         .build();
                 alert.show();
             }
@@ -140,6 +143,7 @@ public class MainActivity extends AppCompatActivity{
                                 Toast.makeText(mContext, "Selected " + i, Toast.LENGTH_SHORT).show();
                             }
                         })
+                        .setDecorView(getWindow().getDecorView())
                         .build();
                 alert.show();
                 Vibrator vibe = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
@@ -196,6 +200,7 @@ public class MainActivity extends AppCompatActivity{
                                 }
                             }
                         })
+                        .setDecorView(getWindow().getDecorView())
                         .build();
                 alert.show();
                 Vibrator vibe = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
@@ -256,6 +261,7 @@ public class MainActivity extends AppCompatActivity{
                         .setLineInputText(lineText)
                         .setBoxInputHint(boxHint)
                         .setBoxInputText(boxText)
+                        .setDecorView(getWindow().getDecorView())
                         .build();
                 alert.show();
             }
@@ -292,6 +298,7 @@ public class MainActivity extends AppCompatActivity{
                         }
                     }
                 })
+                .setDecorView(getWindow().getDecorView())
                 .build();
         alert.show();
     }

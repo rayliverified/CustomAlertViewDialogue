@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.searchy2'
-version = '2.0'
+version = '2.1'
 
 android {
     compileSdkVersion 27
@@ -22,9 +22,11 @@ android {
 
 dependencies {
     repositories {
+        maven { url 'https://jitpack.io' }
         maven { url "https://maven.google.com" }
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:design:27.0.2'
+    implementation 'com.github.Dimezis:BlurView:v1.4.0-SNAPSHOT'
 }
 
