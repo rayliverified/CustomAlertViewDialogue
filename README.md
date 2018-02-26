@@ -39,6 +39,7 @@ CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity
                 dialog.dismiss();
             }
         })
+        .setDecorView(getWindow().getDecorView())
         .build();
 alert.show();
 ``` 
@@ -48,6 +49,11 @@ alert.show();
 * ViewHolder - construct with `getActivity().getApplicationContext()`
 
 Do not attempt to construct the dialogue with `getContext()`. The Builder requires an Activity and passing a Context does not work! 
+
+**Hint:** Passing the DecorView to the Dialogue Builder in setDecorView will create a nice blurred background. Here's how to pass the correct DecorView:
+* Activity - use `getWindow().getDecorView()`
+* Fragment - use `getActivity().getWindow().getDecorView()`
+* Viewholder - use `((Activity) mContext).getWindow().getDecorView()`
 
 # Customization
 
@@ -73,6 +79,7 @@ CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity
                 dialog.dismiss();
             }
         })
+        .setDecorView(getWindow().getDecorView())
         .build();
 alert.show();
 
@@ -106,6 +113,7 @@ CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity
                 dialog.dismiss();
             }
         })
+        .setDecorView(getWindow().getDecorView())
         .build();
 alert.show();
 ```
@@ -150,6 +158,7 @@ CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity
                 Toast.makeText(mContext, "Selected " + i, Toast.LENGTH_SHORT).show();
             }
         })
+        .setDecorView(getWindow().getDecorView())
         .build();
 alert.show();
 ```
@@ -203,6 +212,7 @@ CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity
                 }
             }
         })
+        .setDecorView(getWindow().getDecorView())
         .build();
 alert.show();
 ```
@@ -259,6 +269,7 @@ CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity
         .setLineInputText(lineText)
         .setBoxInputHint(boxHint)
         .setBoxInputText(boxText)
+        .setDecorView(getWindow().getDecorView())
         .build();
 alert.show();
 ```
@@ -323,6 +334,8 @@ alert.show();
 
 `setCancelable(boolean cancelable)` - set false to prevent dialogue dismissal through tapping outside or pressing the back button. Force the user to choose an option.
 
+`setDecorView(View decorView)` - pass the Window DecorView for a nice blurred background. Defaults to overlay color.
+
 `build()` - Construct the Dialogue Builder.
 
 `show()` - Display the Dialogue with Builder parameters.
@@ -345,13 +358,9 @@ These features would make this library even more awesome. You can contribute to 
 
 ---
 
->Dynamic Blur Background
+>Dynamic Blur Background ✔️ (Completed 2/22/2018)
 
-Create a dynamic blur to use as the dialogue's background. Currently, this library uses a transparent gradient as the dialogue's background. 
-
-An attempt to create a dynamic blur was made with the CustomPermissionsDialogue library. Unfortunately, the blur library used does not position the blurred background correctly. This issue is detailed at https://github.com/Dimezis/BlurView/issues/63
-
-If you know how to work with the BlurView library, your help would be greatly appreciated! 
+Thanks to [@Dimezis](https://github.com/Dimezis) for fixing his [BlurView](https://github.com/Dimezis/BlurView) library to work with DialogFragments. Without Dimezis's help, there would be no blurred background! 
 
 >Date Selector
 
@@ -374,11 +383,11 @@ If you've fixed a bug or have a feature you've added, just create a pull request
 # ★ Acknowledgements ★
 **♥ Developer ♥**
 
-Ray Li
+[Ray Li](https://rayliverified.com)
 
 **♥ Designer ♥**
 
-Ray Li
+[Ray Li](https://rayliverified.com)
 
 **♥ Inspiration ♥**
 

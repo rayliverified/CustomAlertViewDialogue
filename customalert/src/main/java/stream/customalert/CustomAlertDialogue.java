@@ -285,7 +285,7 @@ public class CustomAlertDialogue extends DialogFragment {
         }
 
         float radius = 5;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && builder.getDecorView() != null)
         {
             CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview);
             blurDialogue.create(builder.getDecorView(), radius);
@@ -311,7 +311,7 @@ public class CustomAlertDialogue extends DialogFragment {
                 cancelButton.setTextColor(builder.getCancelColor());
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && builder.getDecorView() != null)
             {
                 CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview_button);
                 blurDialogue.create(builder.getDecorView(), radius);
@@ -330,7 +330,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
         initListView(view);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && builder.getDecorView() != null)
         {
             CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview);
             blurDialogue.create(builder.getDecorView(), radius);
@@ -344,7 +344,7 @@ public class CustomAlertDialogue extends DialogFragment {
         initListView(view);
 
         float radius = 5;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && builder.getDecorView() != null)
         {
             CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview);
             blurDialogue.create(builder.getDecorView(), radius);
@@ -509,7 +509,7 @@ public class CustomAlertDialogue extends DialogFragment {
         }
 
         float radius = 5;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && builder.getDecorView() != null)
         {
             CustomBlurDialogue blurDialogue = view.findViewById(R.id.blurview);
             blurDialogue.create(builder.getDecorView(), radius);
@@ -967,17 +967,21 @@ public class CustomAlertDialogue extends DialogFragment {
         }
         public boolean getCancelable() { return cancelable; }
 
-        public View getDecorView() {
-
-            return decorView;
-        }
-
+        /**
+         * @param decorView - pass the Window DecorView for a nice blurred background. Defaults to overlay color.
+         *                  Here's how to pass the correct DecorView in the following classes:
+         *                  Activity - use `getWindow().getDecorView()`
+         *                  Fragment - use `getActivity().getWindow().getDecorView()`
+         *                  Viewholder - use `((Activity) mContext).getWindow().getDecorView()`
+         * @return
+         */
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         public Builder setDecorView(View decorView) {
 
             this.decorView = decorView;
             return this;
         }
+        public View getDecorView() { return decorView; }
 
         /**
          * The Dialog Fragment is extremely picky about the `Activity` passed into the builder.
