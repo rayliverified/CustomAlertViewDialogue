@@ -273,6 +273,22 @@ CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity
         .build();
 alert.show();
 ```
+### Override Fullscreen
+By default, showing an alert dialogue enters fullscreen mode. This behavior can be disabled by overriding the dialogue's style.
+Place the following code in your project's `style.xml` to override the dialogue's style and disable fullscreen mode.
+```
+<!-- Override AlertView Dialogue Fullscreen -->
+<style name="CustomDialog" parent="android:Theme.Dialog">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">false</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:backgroundDimAmount">0.5</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:gravity">center</item>
+</style>
+```
 
 ### Builder Attributes
 
