@@ -34,6 +34,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class CustomAlertDialogue extends DialogFragment {
         return instance;
     }
 
+    private View layout;
     private TextView title, message;
 
     @Override
@@ -192,6 +194,20 @@ public class CustomAlertDialogue extends DialogFragment {
 
     private void initCommonView(View view) {
         //Common elements
+        layout = view.findViewById(R.id.main_layout);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!builder.getCancelable())
+                {
+
+                }
+                else
+                {
+                    dismiss();
+                }
+            }
+        });
         title = view.findViewById(R.id.title);
         message = view.findViewById(R.id.message);
         if (builder.getTitle() != null) {
