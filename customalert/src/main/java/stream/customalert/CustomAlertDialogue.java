@@ -324,7 +324,7 @@ public class CustomAlertDialogue extends DialogFragment {
             });
             if (builder.getCancelColor() != 0)
             {
-                cancelButton.setTextColor(builder.getCancelColor());
+                cancelButton.setTextColor(ContextCompat.getColor(view.getContext(), builder.getCancelColor()));
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && builder.getDecorView() != null)
