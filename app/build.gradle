@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "stream.customalertsample"
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary true
@@ -26,9 +26,9 @@ dependencies {
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':customalert')
-    implementation 'com.github.searchy2:CustomButton:1.7.1'
+    implementation 'com.github.searchy2:CustomButton:1.8.0'
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha3'
+    implementation 'com.google.android.material:material:1.0.0-alpha3'
+    implementation 'androidx.cardview:cardview:1.0.0-alpha3'
 }

@@ -5,12 +5,12 @@ group='com.github.searchy2'
 version = '2.3.1'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
     }
     buildTypes {
         release {
@@ -26,7 +26,7 @@ dependencies {
         maven { url "https://maven.google.com" }
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.google.android.material:material:1.0.0-alpha3'
     implementation 'com.github.Dimezis.BlurView:blurview:version-1.4.0'
 }
 

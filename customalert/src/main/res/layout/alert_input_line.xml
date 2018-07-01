@@ -4,13 +4,13 @@
               android:layout_height="wrap_content"
               android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/alert_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Input text here.">
 
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/alert_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,5 +26,5 @@
             android:saveEnabled="false"
             android:background="@color/transparent"
             android:textCursorDrawable="@drawable/cursor"/>
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
