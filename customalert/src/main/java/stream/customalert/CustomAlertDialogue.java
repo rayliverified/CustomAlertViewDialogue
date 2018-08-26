@@ -46,7 +46,6 @@ public class CustomAlertDialogue extends DialogFragment {
     public static final String TAG = CustomAlertDialogue.class.getSimpleName();
     private Builder builder;
     private Style style = Style.DIALOGUE;
-    private Integer gravity = Gravity.CENTER;
     private ArrayList<String> inputList;
     private TextView positiveText;
     private ArrayList<String> tagList;
@@ -61,10 +60,12 @@ public class CustomAlertDialogue extends DialogFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d("Builder", "Restore");
 
         if (savedInstanceState != null) {
-            if (builder != null) {
+            if (builder == null) {
                 builder = savedInstanceState.getParcelable(Builder.class.getSimpleName());
+                Log.d("Builder", "Restore Not Null");
             }
         }
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
@@ -88,6 +89,12 @@ public class CustomAlertDialogue extends DialogFragment {
         super.onSaveInstanceState(outState);
         if (builder != null)
             outState.putParcelable(Builder.class.getSimpleName(), builder);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        dismiss();
     }
 
     @NonNull
@@ -125,7 +132,7 @@ public class CustomAlertDialogue extends DialogFragment {
         if (builder.getGravity() != null)
         {
             wlp.gravity = builder.getGravity();
-            switch (gravity)
+            switch (builder.getGravity())
             {
                 case Gravity.CENTER:
                     wlp.windowAnimations = R.style.CustomDialogAnimation;
@@ -148,6 +155,7 @@ public class CustomAlertDialogue extends DialogFragment {
         if (builder.getStyle() != null)
         {
             style = builder.getStyle();
+            Log.d("View Inflator", "Inflated");
         }
 
         switch (style)
@@ -198,11 +206,7 @@ public class CustomAlertDialogue extends DialogFragment {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!builder.getCancelable())
-                {
-
-                }
-                else
+                if (builder.getCancelable())
                 {
                     dismiss();
                 }
@@ -312,7 +316,7 @@ public class CustomAlertDialogue extends DialogFragment {
 
         float radius = 5;
 
-        TextView cancelButton = view.findViewById(R.id.cancel);
+        final TextView cancelButton = view.findViewById(R.id.cancel);
         if(builder.getCancelText() != null){
             cancelButton.setVisibility(View.VISIBLE);
             cancelButton.setText(builder.getCancelText());
@@ -577,7 +581,7 @@ public class CustomAlertDialogue extends DialogFragment {
         private boolean autoHide;
         private boolean cancelable = true;
 
-        private Integer gravity;
+        private Integer gravity = Gravity.CENTER;
         private Style style;
         private View decorView;
         private Context context;
@@ -603,19 +607,9 @@ public class CustomAlertDialogue extends DialogFragment {
             boxInputText = in.createStringArrayList();
             autoHide = in.readByte() != 0;
             cancelable = in.readByte() != 0;
+            gravity = in.readInt();
+            style = Style.valueOf(in.readString());
         }
-
-        public static final Creator<Builder> CREATOR = new Creator<Builder>() {
-            @Override
-            public Builder createFromParcel(Parcel in) {
-                return new Builder(in);
-            }
-
-            @Override
-            public Builder[] newArray(int size) {
-                return new Builder[size];
-            }
-        };
 
         /**
          * @param style - set DIALOGUE, ACTIONSHEET, SELECTOR, INPUT to select AlertView type.
@@ -630,7 +624,9 @@ public class CustomAlertDialogue extends DialogFragment {
         public Style getStyle() { return style; }
 
         public Builder setGravity(Integer gravity) {
-            this.gravity = gravity;
+            if(gravity != null) {
+                this.gravity = gravity;
+            }
             return this;
         }
         public Integer getGravity() { return gravity; }
@@ -1029,6 +1025,18 @@ public class CustomAlertDialogue extends DialogFragment {
             return CustomAlertDialogue.getInstance().show(((Activity) context), this);
         }
 
+        public static final Creator<Builder> CREATOR = new Creator<Builder>() {
+            @Override
+            public Builder createFromParcel(Parcel in) {
+                return new Builder(in);
+            }
+
+            @Override
+            public Builder[] newArray(int size) {
+                return new Builder[size];
+            }
+        };
+
         @Override
         public int describeContents() {
             return 0;
@@ -1036,6 +1044,28 @@ public class CustomAlertDialogue extends DialogFragment {
 
         @Override
         public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeString(title);
+            parcel.writeString(message);
+            parcel.writeString(positiveText);
+            parcel.writeString(negativeText);
+            parcel.writeString(cancelText);
+            parcel.writeInt(titleColor);
+            parcel.writeInt(messageColor);
+            parcel.writeInt(positiveColor);
+            parcel.writeInt(negativeColor);
+            parcel.writeInt(cancelColor);
+            parcel.writeInt(backgroundColor);
+            parcel.writeInt(timeToHide);
+            parcel.writeStringList(destructive);
+            parcel.writeStringList(others);
+            parcel.writeStringList(lineInputHint);
+            parcel.writeStringList(lineInputText);
+            parcel.writeStringList(boxInputHint);
+            parcel.writeStringList(boxInputText);
+            parcel.writeByte((byte) (autoHide ? 1 : 0));
+            parcel.writeByte((byte) (cancelable ? 1 : 0));
+            parcel.writeInt(gravity);
+            parcel.writeString(style.toString());
         }
     }
 
