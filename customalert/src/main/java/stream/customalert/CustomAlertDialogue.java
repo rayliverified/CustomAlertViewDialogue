@@ -60,27 +60,14 @@ public class CustomAlertDialogue extends DialogFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.d("Builder", "Restore");
 
         if (savedInstanceState != null) {
             if (builder == null) {
                 builder = savedInstanceState.getParcelable(Builder.class.getSimpleName());
-                Log.d("Builder", "Restore Not Null");
             }
         }
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
         setRetainInstance(true);
-        if (builder != null)
-        {
-            if (!builder.getCancelable())
-            {
-                this.setCancelable(false);
-            }
-            else
-            {
-                this.setCancelable(true);
-            }
-        }
         super.onCreate(savedInstanceState);
     }
 
@@ -144,6 +131,14 @@ public class CustomAlertDialogue extends DialogFragment {
         }
 
         window.setAttributes(wlp);
+
+        if (builder != null) {
+            if (!builder.getCancelable()) {
+                setCancelable(false);
+            } else {
+                setCancelable(true);
+            }
+        }
 
         return dialog;
     }

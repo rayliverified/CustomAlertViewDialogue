@@ -2,11 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.searchy2'
-version = '2.5.0'
+version = '2.5.1'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 15
@@ -26,7 +25,7 @@ dependencies {
         maven { url "https://maven.google.com" }
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.google.android.material:material:1.0.0-rc01'
+    implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.Dimezis.BlurView:blurview:version-1.4.0'
 }
 
