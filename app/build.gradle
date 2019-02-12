@@ -27,7 +27,7 @@ dependencies {
     implementation project(':customalert')
     implementation 'com.github.searchy2:CustomButton:1.8.2'
 
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 }

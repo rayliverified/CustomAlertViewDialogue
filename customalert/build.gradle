@@ -25,7 +25,7 @@ dependencies {
         maven { url "https://maven.google.com" }
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.github.Dimezis.BlurView:blurview:version-1.4.0'
+    api 'com.google.android.material:material:1.0.0'
+    api 'com.github.Dimezis.BlurView:blurview:version-1.4.0'
 }
 
