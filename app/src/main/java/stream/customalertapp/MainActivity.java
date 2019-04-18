@@ -1,6 +1,5 @@
 package stream.customalertapp;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -8,14 +7,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity{
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<String> other = new ArrayList<String>();
+                ArrayList<String> other = new ArrayList<>();
                 other.add("Copy");
                 other.add("Forward");
 
@@ -270,9 +270,9 @@ public class MainActivity extends AppCompatActivity{
 
     public void MoreSelector()
     {
-        ArrayList<String> destructive = new ArrayList<String>();
+        ArrayList<String> destructive = new ArrayList<>();
         destructive.add("Delete");
-        ArrayList<String> other = new ArrayList<String>();
+        ArrayList<String> other = new ArrayList<>();
         other.add("Details");
 
         CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
@@ -304,6 +304,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     //Hide background for screenshots.
+    @SuppressWarnings("unused")
     public void HideBackground(boolean hide)
     {
         if (hide)

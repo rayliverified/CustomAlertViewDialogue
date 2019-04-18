@@ -26,6 +26,6 @@ dependencies {
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api 'com.google.android.material:material:1.0.0'
-    api 'com.github.Dimezis.BlurView:blurview:version-1.4.0'
+    api 'com.eightbitlab:blurview:1.5.0'
 }
 

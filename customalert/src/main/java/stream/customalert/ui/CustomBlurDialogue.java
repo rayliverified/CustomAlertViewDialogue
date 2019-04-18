@@ -57,9 +57,10 @@ public class CustomBlurDialogue extends BlurView {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             setupWith(rootView)
-                    .windowBackground(windowBackground)
-                    .blurAlgorithm(new RenderScriptBlur(getContext()))
-                    .blurRadius(radius);
+                    .setFrameClearDrawable(windowBackground)
+                    .setBlurAlgorithm(new RenderScriptBlur(getContext()))
+                    .setBlurRadius(radius)
+                    .setHasFixedTransformationMatrix(true);
         }
     }
 
