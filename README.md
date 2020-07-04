@@ -1,17 +1,32 @@
-[![GitHub release](https://img.shields.io/github/release/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue/releases) [![GitHub Release Date](https://img.shields.io/github/release-date/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![Libraries.io for GitHub](https://img.shields.io/librariesio/github/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![GitHub issues](https://img.shields.io/github/issues/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![API](https://img.shields.io/badge/API-15%2B-blue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![GitHub top language](https://img.shields.io/github/languages/top/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue)
-# Custom AlertView Dialogue
-
 ![Screenshots](screenshots/Custom-Alertview-Dialogue-Cover_1280x.gif)
 
-Custom AlertView Dialogue is the world's most advanced alert view library. Custom AlertView Dialogue includes simple message popups, confirmation alerts, selector popups, action sheet bottom menus, and input/feedback contact forms. This library fixes many issues and crashes that plague other alert dialogue libraries and looks amazing while doing so! 
+# Custom AlertView Dialogue
 
-![Screenshots](screenshots/Custom-Alert-Dialogue-Screenshot.gif)
+[![GitHub release](https://img.shields.io/github/release/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue/releases) [![GitHub Release Date](https://img.shields.io/github/release-date/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![Libraries.io for GitHub](https://img.shields.io/librariesio/github/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![GitHub issues](https://img.shields.io/github/issues/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![API](https://img.shields.io/badge/API-15%2B-blue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue) [![GitHub top language](https://img.shields.io/github/languages/top/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue)
+
+<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="128">
+
+> ### The most advanced Android dialogue library. 
+
+Custom AlertView Dialogue includes simple message popups, confirmation alerts, selector popups, action sheet bottom menus, and input/feedback contact forms. This library fixes many issues and crashes that plague other alert dialogue libraries and looks amazing while doing so! 
 
 Custom AlertView Dialogue is part of the [Custom UI](http://rayliverified.com/index.php/code/) collection of beautiful, minimalistic, and customizable Android UI components.
 
-# Gradle Dependency
+![Screenshots](screenshots/Custom-Alert-Dialogue-Screenshot.gif)
 
-Add this line to your `build.gradle` project. Use the latest release version for the version code. 
+## About
+
+Android alert dialogues are bland, limited in functionality, and visually inconsistent across Android versions. Existing Android dialogue libraries often crashed and were hard to customize. CustomAlertDialogue was created to offer a beautiful alert dialogue with advanced capabilities. Here at Codelessly, we're building a Flutter website/app builder, development tools, and UI templates to increase productivity. If that sounds interesting, you'll want to subscribe to updates below 😎
+
+CustomAlertViewDialogue is licensed under Zero-Clause BSD and released as Emailware. If you like this project or it helped you, please subscribe to updates. Although it is not required, you might miss the goodies we share!
+
+<a href="https://codelessly.com/?utm_medium=banner&utm_campaign=newsletter_subscribe" target="_blank"><img src="https://raw.githubusercontent.com/Codelessly/ResponsiveFramework/master/packages/Email%20Newsletter%20Signup.png"></a>
+
+# Import
+
+[![GitHub release](https://img.shields.io/github/release/searchy2/CustomAlertViewDialogue.svg?style=flat-square)](https://github.com/searchy2/CustomAlertViewDialogue/releases)
+
+Add this library to `build.gradle`.
 
 ```java
 repositories {
@@ -20,8 +35,6 @@ repositories {
 implementation 'com.github.searchy2:CustomAlertViewDialogue:latest-version'
 ```
 # Usage
-
-### Code
 
 Custom AlertView Dialogue uses the Builder format to initialize an alert view programmatically. To display an simple alert message, just drag and drop the following code into your project. It's that easy!
 
@@ -55,11 +68,9 @@ Do not attempt to construct the dialogue with `getContext()`. The Builder requir
 * Fragment - use `getActivity().getWindow().getDecorView()`
 * Viewholder - use `((Activity) mContext).getWindow().getDecorView()`
 
-# Customization
+# Examples
 
 Custom AlertView Dialogue provides many customization methods to display the alerts you need.
-
-### Layouts
 
 **Simple Alert - a simple popup message.**
 
@@ -273,9 +284,14 @@ CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity
         .build();
 alert.show();
 ```
+
+# Customization
+
 ### Override Fullscreen
+
 By default, showing an alert dialogue enters fullscreen mode. This behavior can be disabled by overriding the dialogue's style.
 Place the following code in your project's `style.xml` to override the dialogue's style and disable fullscreen mode.
+
 ```
 <!-- Override AlertView Dialogue Fullscreen -->
 <style name="CustomDialog" parent="android:Theme.Dialog">
@@ -292,77 +308,48 @@ Place the following code in your project's `style.xml` to override the dialogue'
 
 ### Builder Attributes
 
-`setStyle(Style style)` - set DIALOGUE, ACTIONSHEET, SELECTOR, INPUT to select AlertView type.
-
-`setTitle(String title)` - set AlertView title text.
-
-`setMessage(String message)` - set AlertView message text.
-
-`setPositiveText(String positiveButtonText)` - set Confirmation Alert right button text.
-
-`setNegativeText(String negativeText)` - set Simple Alert button text. Set Confirmation Alert left button text.
-
-`setCancelText(String cancel)` - set Action Sheet cancel button text.
-
-`setTitleColor(int titleColor)` - set title text color.
-
-`setMessageColor(int messageColor)` - set message text color.
-
-`setPositiveColor(int positiveTextColor)` - set positive button text color.
-
-`setNegativeColor(int negativeColor)` - set negative button text color.
-
-`setCancelColor(int cancelColor)` - set cancel button text color.
-
-`setTitleFont(String titleFontPath)` - set title text font. Must pass the path to the font in the assets folder.
-
-`setMessageFont(String bodyFontPath)` - set message text font. Must pass the path to the font in the assets folder.
-
-`setPositiveTypeface(Typeface positiveTypeface)` - set positive button text typeface.
-
-`setNegativeTypeface(Typeface negativeTypeface)` - set negative button text typeface.
-
-`setOnPositiveClicked(OnPositiveClicked onPositiveClicked)` - pass a listener to be called when the positive button is clicked.
-
-`setOnNegativeClicked(OnNegativeClicked onNegativeClicked)` - pass a listener to be called when the negative button is clicked.
-
-`setOnCancelClicked(OnCancelClicked onCancelClicked)` - pass a listener to be called when the cancel button is clicked.
-
-`setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener)` - pass a listener to be called when a selection item is clicked.
-
-`setOnInputClicked(OnInputClicked onInputClicked)` - pass a listener to be called when an input box is submitted.
-
-`setDestructive(ArrayList<String> destructive)` - converts a String ArrayList into destructive options in the selector.
-
-`setOthers(ArrayList<String> others)` - converts a String ArrayList into neutral options in the selector.
-
-`setLineInputText(ArrayList<String> lineInputText)` - converts a String ArrayList into single line text input boxes.
-
-`setLineInputHint(ArrayList<String> lineInputHint)` - converts a String ArrayList into single line input boxes hints. Array length must match LineInputText length.
-
-`setBoxInputText(ArrayList<String> boxInputText)` - converts a String ArrayList into multiline text input boxes.
-
-`setBoxInputHint(ArrayList<String> boxInputHint)` - converts a String ArrayList into multiline input boxes hints. Array length must match BoxInputText length.
-
-`setAutoHide(boolean autoHide)` - set `true` to automatically hide alert after a set time.
-
-`setTimeToHide(int timeToHide)` - set time in milliseconds for popup to automatically dismiss. No listeners are triggered when dismissed automatically.
-
-`setCancelable(boolean cancelable)` - set false to prevent dialogue dismissal through tapping outside or pressing the back button. Force the user to choose an option.
-
-`setDecorView(View decorView)` - pass the Window DecorView for a nice blurred background. Defaults to overlay color.
-
-`build()` - Construct the Dialogue Builder.
-
-`show()` - Display the Dialogue with Builder parameters.
+|Attribute|Description| 
+|--|--|
+|setStyle(Style style)|Set AlertView type </br> `DIALOGUE` </br> `ACTIONSHEET` </br> `SELECTOR` </br> `INPUT`|
+|setTitle(String title)|set AlertView title text|
+|setMessage(String message)|setMessage(String message)|
+|setPositiveText(String positiveButtonText)|set Confirmation Alert right button text|
+|set Confirmation Alert right button text|set Confirmation Alert right button text|
+|set Confirmation Alert right button text|set Action Sheet cancel button text|
+|setTitleColor(int titleColor)|set title text color|
+|setMessageColor(int messageColor)|set message text color|
+|setPositiveColor(int positiveTextColor)|set positive button text color|
+|setNegativeColor(int negativeColor)|set negative button text color|
+|setCancelColor(int cancelColor)|set cancel button text color|
+|set cancel button text color|set title text font. Must pass the path to the font in the assets folder|
+|setMessageFont(String bodyFontPath)|set message text font. Must pass the path to the font in the assets folder|
+|setPositiveTypeface(Typeface positiveTypeface)|set positive button text typeface|
+|set positive button text typeface|set positive button text typeface|
+|setOnPositiveClicked(OnPositiveClicked onPositiveClicked)|pass a listener to be called when the positive button is clicked|
+|setOnNegativeClicked(OnNegativeClicked onNegativeClicked)|pass a listener to be called when the negative button is clicked|
+|setOnCancelClicked(OnCancelClicked onCancelClicked)|pass a listener to be called when the cancel button is clicked|
+|setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener)|pass a listener to be called when a selection item is clicked|
+|setOnInputClicked(OnInputClicked onInputClicked)|pass a listener to be called when an input box is submitted|
+|setDestructive(ArrayList<String> destructive)|converts a String ArrayList into destructive options in the selector|
+|setOthers(ArrayList<String> others)|converts a String ArrayList into neutral options in the selector|
+|setLineInputText(ArrayList<String> lineInputText)|converts a String ArrayList into single line text input boxes|
+|setLineInputHint(ArrayList<String> lineInputHint)|converts a String ArrayList into single line input boxes hints. Array length must match LineInputText length.|
+|setBoxInputText(ArrayList<String> boxInputText)|setBoxInputText(ArrayList<String> boxInputText)|
+|setBoxInputText(ArrayList<String> boxInputText)|converts a String ArrayList into multiline input boxes hints. Array length must match BoxInputText length|
+|setAutoHide(boolean autoHide)|set `true` to automatically hide alert after a set time|
+|setTimeToHide(int timeToHide)|set time in milliseconds for popup to automatically dismiss. No listeners are triggered when dismissed automatically.|
+|setCancelable(boolean cancelable)|set false to prevent dialogue dismissal through tapping outside or pressing the back button. Force the user to choose an option.|
+|setDecorView(View decorView)|pass the Window DecorView for a nice blurred background. Defaults to overlay color.|
+|build()|construct the Dialogue Builder|
+|show()|display the Dialogue with Builder parameters|
 
 View the Layouts section or the sample app for examples of how to use these Builder attributes. 
 
-### Creating a New Layout
+### New Layout Creation
 
 Custom AlertView Dialogue provides a powerful framework to creating new alert layouts quickly. If one of the existing alerts do not meet your needs, creating a new alert is very simple! You can take advantage of the existing dialogue code and just declare a new style in the Style enumerator. 
 
-Once you have a new style, you can duplicate an existing layout or start from scratch. Dialog Fragment behaves much like a regular fragment with support for RecyclerViews and Relative Layouts. Most existing layout and code can be dragged and dropped into a Dialog Fragment. **Note:** Dialog Fragment does not support ViewPagers (once suffered a day's worth of work lost due to this unfortunate limitation :P).
+Once you have a new style, you can duplicate an existing layout or start from scratch. Dialog Fragment behaves much like a regular fragment with support for RecyclerViews and Relative Layouts. Most existing layout and code can be dragged and dropped into a Dialog Fragment. **Note:** ViewPagers cannot be placed in a Dialog Fragment because Dialog Fragments do not support ViewPagers (an entire day's work was lost due to this unfortunate limitation :P).
 
 With your new layout, all that is left is adding the corresponding code and listener callbacks. Most code works well within a Dialog Fragment just like layouts do. If you wish to pass back information, follow the existing examples to create your own onClickListener callback. 
 
@@ -411,8 +398,12 @@ UI design and functionality - https://github.com/saiwu-bigkoo/Android-AlertView
 
 Dialog Fragment code - https://github.com/geniusforapp/fancyDialog
 
+**♥ Sponsor ♥**
+
+[Codelessly - Flutter Website and App Builder](https://codelessly.com/?utm_medium=link&utm_campaign=direct)
+
 # ★ Get in Touch ★
-<a href="mailto:ray.li.verified@gmail.com">
+<a href="mailto:ray@codelessly.com">
   <img alt="Ray Li Email"
        src="https://lh3.googleusercontent.com/yN_m90WN_HSCohXdgC2k91uSTk9dnYfoxTYwG_mv_l5_05dV2CzkQ1B6rEqH4uqdgjA=w96" />
 </a>
@@ -439,7 +430,7 @@ Dialog Fragment code - https://github.com/geniusforapp/fancyDialog
 
 # Apps Using This Library
 
-Want to be here? You can include yourself by making a `pull request`. 
+Add your app here by making a `pull request`. 
 
 <table>
     <tr>
