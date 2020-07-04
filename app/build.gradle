@@ -25,9 +25,9 @@ dependencies {
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':customalert')
-    implementation 'com.github.searchy2:CustomButton:1.9.0'
+    implementation 'com.github.searchy2:CustomButton:1.9.1'
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 }

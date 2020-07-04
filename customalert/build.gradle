@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.searchy2'
-version = '2.6.0'
+version = '2.6.1'
 
 android {
     compileSdkVersion 28
@@ -25,7 +25,7 @@ dependencies {
         maven { url "https://maven.google.com" }
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api 'com.google.android.material:material:1.0.0'
+    api 'com.google.android.material:material:1.1.0'
     api 'com.eightbitlab:blurview:1.5.0'
 }
 
